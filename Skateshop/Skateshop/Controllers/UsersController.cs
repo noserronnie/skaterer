@@ -71,7 +71,7 @@ namespace Skateshop.Controllers
         [HttpPost("Login")]
         public IActionResult Login([Bind("Id,Username,Password")] User user)
         {
-            if (ModelState.IsValid && _authService.Login(HttpContext, user))
+            if (_authService.Login(HttpContext, user))
             {
                 return RedirectToAction("Index", "Home");
             }
