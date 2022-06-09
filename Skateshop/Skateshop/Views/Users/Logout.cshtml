@@ -5,20 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Logout</h1>
+<div class="center-site width-40">
+    <i class="site-icon-danger fas fa-sign-out-alt"></i>
+    <br><br><br>
 
-<h4>Are you sure you want to logout?</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ConfirmLogout">
-            <div class="form-group">
-                <input type="submit" value="Logout" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+    <h1>Are you sure you want to logout?</h1>
+    <br>
+
+    <form asp-action="ConfirmLogout">
+        <div class="form-group">
+            <input type="submit" value="Logout" class="button button-danger width-100" />
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
