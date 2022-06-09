@@ -1,0 +1,52 @@
+﻿/* Button */
+
+.button {
+    padding: 10px;
+    display: inline-block;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.button:hover {
+    text-decoration: none;
+}
+
+.button:active {
+	position: relative;
+	top: 1px;
+}
+
+.button-primary {
+    color: #fff;
+    background-color: #44c767;
+    border: 1px solid #18ab29;
+}
+
+.button-primary:hover {
+    color: #fff;
+    background-color: #5cbf2a;
+}
+
+.button-secondary {
+    color: #777777;
+    background-color: #fff;
+    border: 1px solid #777777;
+}
+
+.button-secondary:hover {
+    color: #000;
+    border: 1px solid #000;
+}
+
+/* Rating Star */
+
+.star-checked {
+    color: #ff0;
+    text-shadow: 0px 0px 2px black;
+}
+
+.star-unchecked {
+    color: #fff;
+    text-shadow: 0px 0px 2px black;
+}

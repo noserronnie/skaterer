@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Skateshop.Composite.Product>
+
+@{
+    ViewData["Title"] = "Skaterer";
+}
+
+<div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3" style="margin-bottom: 20px;">
+                <div class="card" style="width: 100%; height: 100%">
+                    <img class="card-img-top" src="@item.ImagePath" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        @if (item is DeckProduct)
+                        {
+                            var deckProduct = (DeckProduct)item;
+                            <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
+                        }
+                        else if (item is TrucksProduct)
+                        {
+                            var trucksProduct = (TrucksProduct)item;
+                            <a class="btn btn-primary" style="width: 100%; bottom: 0" asp-controller="Products" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
+                        }
+                        else if (item is WheelsProduct)
+                        {
+                            var wheelsProduct = (WheelsProduct)item;
+                            <a class="btn btn-primary" style="width: 100%; bottom: 0" asp-controller="Products" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
+                        }
+                        else if (item is GriptapeProduct)
+                        {
+                            var griptapeProduct = (GriptapeProduct)item;
+                            <a class="btn btn-primary" style="width: 100%; bottom: 0" asp-controller="Products" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
+            <img src="~/img/home-tall1.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-wide1.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-tall4.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-wide4.png" class="img-fluid mb-4" alt="">
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="~/img/home-wide2.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-tall2.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-wide5.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-tall5.png" class="img-fluid mb-4" alt="">
+
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <img src="~/img/home-tall3.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-wide3.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-tall6.png" class="img-fluid mb-4" alt="">
+            <img src="~/img/home-wide6.gif" class="img-fluid mb-4" alt="">
+        </div>
+
+    </div>
+</div>

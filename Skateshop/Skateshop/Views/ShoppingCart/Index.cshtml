@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Skateshop.Composite.Product>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    float sum = 0;
+}
+
+<h1>Your Shopping Cart</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3" style="margin-bottom: 20px;">
+            <div class="card" style="width: 100%; height: 100%">
+                <img class="card-img-top" src="@item.ImagePath" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Price CHF</p>
+                    @if (item is DeckProduct)
+                    {
+                        var deckProduct = (DeckProduct)item;
+                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
+                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveDeckProduct" asp-route-id="@deckProduct.Id">Remove</a>
+                        sum += deckProduct.Price;
+                    }
+                    else if (item is TrucksProduct)
+                    {
+                        var trucksProduct = (TrucksProduct)item;
+                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
+                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveTrucksProduct" asp-route-id="@trucksProduct.Id">Remove</a>
+                        sum += trucksProduct.Price;
+                    }
+                    else if (item is WheelsProduct)
+                    {
+                        var wheelsProduct = (WheelsProduct)item;
+                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
+                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveWheelsProduct" asp-route-id="@wheelsProduct.Id">Remove</a>
+                        sum += wheelsProduct.Price;
+                    }
+                    else if (item is GriptapeProduct)
+                    {
+                        var griptapeProduct = (GriptapeProduct)item;
+                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveGriptapeProduct" asp-route-id="@griptapeProduct.Id">Remove</a>
+                        sum += griptapeProduct.Price;
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    <h2>Sum: @sum CHF</h2>
+</div>

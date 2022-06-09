@@ -1,0 +1,67 @@
+﻿@model Skateshop.Models.TrucksProduct
+
+@using Skateshop.Services
+@inject IAuthService authService
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Name</h1>
+
+<div>
+    <h4>@Model.Description</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="@Model.ImagePath" style="width: 100%;" />
+        </div>
+        <div class="col-sm-8">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Price) CHF
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.AxleWidth)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.AxleWidth)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.HangerWidth)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.HangerWidth)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Height)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Height)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Weight)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Weight)
+                </dd>
+            </dl>
+            @if (authService.IsAuthorized(Context))
+            {
+                <a class="btn btn-primary" asp-area="" asp-controller="ShoppingCart" asp-action="AddTrucksProduct" asp-route-id="@Model.Id" style="width: 100%">Add to Shopping Cart</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
+            }
+        </div>
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,73 @@
+﻿@model Skateshop.Models.DeckProduct
+
+@using Skateshop.Services
+@inject IAuthService authService
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Name</h1>
+
+<div>
+    <h4>@Model.Description</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="@Model.ImagePath" style="width: 100%;" />
+        </div>
+        <div class="col-sm-8">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Width)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Width)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Length)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Length)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Wheelbase)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Wheelbase)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Nose)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Nose)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Tail)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Tail)
+                </dd>
+            </dl>
+            @if (authService.IsAuthorized(Context))
+            {
+                <a class="btn btn-primary" asp-area="" asp-controller="ShoppingCart" asp-action="AddDeckProduct" asp-route-id="@Model.Id" style="width: 100%">Add to Shopping Cart</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
+            }
+        </div>
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index">Back to Products</a>
+</div>
