@@ -32,7 +32,7 @@ namespace Skateshop.Controllers
 
         // POST: Register
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([Bind("Id,Username,Password")] User user)
+        public async Task<IActionResult> Register([Bind("Id,Username,Email,Password")] User user)
         {
             if (ModelState.IsValid && !_context.User.Any(u => u.Username.Equals(user.Username)))
             {
@@ -42,6 +42,7 @@ namespace Skateshop.Controllers
                 _context.Add(new User
                 {
                     Username = user.Username,
+                    Email = user.Email,
                     Password = Cipher.Encrypt(user.Password),
                     ShoppingCart = shoppingCart
                 });
