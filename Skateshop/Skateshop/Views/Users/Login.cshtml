@@ -1,4 +1,4 @@
-﻿@model Skaterer.Models.User
+﻿@model Skaterer.Services.Auth.Models.LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -15,8 +15,8 @@
     <form asp-action="Login">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <input asp-for="Username" placeholder="Username / E-Mail" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
+            <input asp-for="Identifier" placeholder="Username / E-Mail" class="form-control" />
+            <span asp-validation-for="Identifier" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="password" asp-for="Password" placeholder="Password" class="form-control" />

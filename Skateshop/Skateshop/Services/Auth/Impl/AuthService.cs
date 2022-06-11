@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Skaterer.Data;
 using Skaterer.Models;
+using Skaterer.Services.Auth.Models;
 using System;
 using System.Linq;
 
@@ -18,36 +19,62 @@ namespace Skaterer.Services.Auth.Impl
 
         public bool IsAuthorized(HttpContext httpContext)
         {
-            var username = httpContext.Request.Cookies["username"];
+            var identifier = httpContext.Request.Cookies["identifier"];
             var password = httpContext.Request.Cookies["password"];
 
-            return _context.User.Any(u => u.Username.Equals(username) && u.Password.Equals(password));
+            return _context.User.Any(u => (u.Username.Equals(identifier)
+                || u.Email.Equals(identifier))
+                && u.Password.Equals(password));
         }
 
         public bool IsAdmin(HttpContext httpContext)
         {
             if (IsAuthorized(httpContext))
             {
-                return httpContext.Request.Cookies["username"].Equals("admin");
+                return httpContext.Request.Cookies["identifier"].Equals("admin");
             }
             return false;
         }
 
         public bool Login(HttpContext httpContext, User user)
         {
+            var loginViewModel = new LoginViewModel
+            {
+                Password = user.Password
+            };
+
+            if (user.Username != null)
+            {
+                loginViewModel.Identifier = user.Username;
+            }
+            else if (user.Email != null)
+            {
+                loginViewModel.Identifier = user.Email;
+            }
+            else
+            {
+                return false;
+            }
+
+            return Login(httpContext, loginViewModel);
+        }
+
+        public bool Login(HttpContext httpContext, LoginViewModel user)
+        {
             try
             {
                 var dbUser = _context.User.First
-                    (u => u.Username.Equals(user.Username) &&
-                    u.Password.Equals(Cipher.Encrypt(user.Password)));
+                    (u => (u.Username.Equals(user.Identifier)
+                    || u.Email.Equals(user.Identifier))
+                    && u.Password.Equals(Cipher.Encrypt(user.Password)));
 
                 var cookieOptions = new CookieOptions
                 {
                     Path = "/"
                 };
                 httpContext.Response.Cookies.Append(
-                    "username",
-                    user.Username,
+                    "identifier",
+                    user.Identifier,
                     cookieOptions
                 );
                 httpContext.Response.Cookies.Append(
@@ -65,11 +92,11 @@ namespace Skaterer.Services.Auth.Impl
 
         public void Logout(HttpContext httpContext)
         {
-            if (httpContext.Request.Cookies.Keys.Any(key => key.Equals("username")))
+            if (httpContext.Request.Cookies.Keys.Any(key => key.Equals("identifier")))
             {
-                httpContext.Response.Cookies.Delete("username");
+                httpContext.Response.Cookies.Delete("identifier");
             }
-            if (httpContext.Request.Cookies.Keys.Any(key => key.Equals("username")))
+            if (httpContext.Request.Cookies.Keys.Any(key => key.Equals("identifier")))
             {
                 httpContext.Response.Cookies.Delete("password");
             }
@@ -77,9 +104,12 @@ namespace Skaterer.Services.Auth.Impl
 
         public string GetUsername(HttpContext httpContext)
         {
-            var username = string.Empty;
-            if (httpContext.Request.Cookies.TryGetValue("username", out username))
+            var identifier = string.Empty;
+            if (httpContext.Request.Cookies.TryGetValue("identifier", out identifier))
             {
+                var username = _context.User
+                    .SingleOrDefault(u => u.Username.Equals(identifier)
+                    || u.Email.Equals(identifier)).Username;
                 return username;
             }
             return "Error";
@@ -88,7 +118,7 @@ namespace Skaterer.Services.Auth.Impl
         public long GetUserId(HttpContext httpContext)
         {
             var username = string.Empty;
-            if (httpContext.Request.Cookies.TryGetValue("username", out username))
+            if (httpContext.Request.Cookies.TryGetValue("identifier", out username))
             {
                 var id = _context.User.Where(u => u.Username.Equals(username)).First().Id;
                 return id;

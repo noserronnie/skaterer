@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Skaterer.Models;
+using Skaterer.Services.Auth.Models;
 
 namespace Skaterer.Services.Auth
 {
@@ -8,6 +9,7 @@ namespace Skaterer.Services.Auth
         bool IsAuthorized(HttpContext httpContext);
         bool IsAdmin(HttpContext httpContext);
         bool Login(HttpContext httpContext, User user);
+        bool Login(HttpContext httpContext, LoginViewModel user);
         void Logout(HttpContext httpContext);
         string GetUsername(HttpContext httpContext);
         long GetUserId(HttpContext httpContext);

@@ -4,6 +4,7 @@ using Skaterer.Data;
 using Skaterer.Models;
 using Skaterer.Services;
 using Skaterer.Services.Auth;
+using Skaterer.Services.Auth.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,13 +71,13 @@ namespace Skaterer.Controllers
 
         // POST: Login
         [HttpPost("Login")]
-        public IActionResult Login([Bind("Id,Username,Password")] User user)
+        public IActionResult Login([Bind("Identifier,Password")] LoginViewModel user)
         {
             if (_authService.Login(HttpContext, user))
             {
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.Error = "Wrong username or password";
+            ViewBag.Error = "Wrong username/email or password";
             return View(user);
         }
 
