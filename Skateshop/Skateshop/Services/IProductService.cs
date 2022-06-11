@@ -1,6 +1,6 @@
-﻿using Skateshop.Composite;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Skaterer.Products;
 
 namespace Skaterer.Services
 {

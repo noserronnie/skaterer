@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Skateshop.Models;
+using Skaterer.Models;
 
-namespace Skateshop.Data
+namespace Skaterer.Data
 {
     public class SkatererContext : DbContext
     {
@@ -23,5 +23,7 @@ namespace Skateshop.Data
         public DbSet<Brand> Brand { get; set; }
 
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
+
+        public DbSet<Skaterer.Models.Rating> Rating { get; set; }
     }
 }

@@ -1,12 +1,12 @@
-﻿@model Skateshop.Models.WheelsProduct
+﻿@model Skaterer.Models.WheelsProduct
 
-@using Skateshop.Services
+@using Skaterer.Services
 @inject IAuthService authService
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var rating = Math.Round(Model.Rating, 0, MidpointRounding.AwayFromZero);
+    var rating = Math.Round(4.4, 0, MidpointRounding.AwayFromZero);
 }
 
 <div>
@@ -27,7 +27,7 @@
                 {
                     <span class="fa fa-star star-unchecked"></span>
                 }
-                <span>(@Model.Rating Stars)</span>
+                <span>(4.4 Stars)</span>
             </div>
             <hr />
 

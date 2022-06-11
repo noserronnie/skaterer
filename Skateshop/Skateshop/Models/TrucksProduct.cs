@@ -1,8 +1,8 @@
-﻿using Skateshop.Composite;
+﻿using Skaterer.Products;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Skateshop.Models
+namespace Skaterer.Models
 {
     public class TrucksProduct : Product
     {

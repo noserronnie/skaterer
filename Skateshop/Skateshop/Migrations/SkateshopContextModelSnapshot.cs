@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Skateshop.Data;
+using Skaterer.Data;
 
-namespace Skateshop.Migrations
+namespace Skaterer.Migrations
 {
     [DbContext(typeof(SkatererContext))]
     partial class SkateshopContextModelSnapshot : ModelSnapshot
@@ -79,7 +79,7 @@ namespace Skateshop.Migrations
                     b.ToTable("ShoppingCartWheelsProduct");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.Brand", b =>
+            modelBuilder.Entity("Skaterer.Models.Brand", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace Skateshop.Migrations
                     b.ToTable("Brand");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.DeckProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.DeckProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -122,9 +122,6 @@ namespace Skateshop.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
                     b.Property<float>("Tail")
                         .HasColumnType("real");
 
@@ -141,7 +138,7 @@ namespace Skateshop.Migrations
                     b.ToTable("DeckProduct");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.GriptapeProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.GriptapeProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,9 +163,6 @@ namespace Skateshop.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
                     b.Property<float>("Width")
                         .HasColumnType("real");
 
@@ -179,7 +173,7 @@ namespace Skateshop.Migrations
                     b.ToTable("GriptapeProduct");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.ShoppingCart", b =>
+            modelBuilder.Entity("Skaterer.Models.ShoppingCart", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,7 +185,7 @@ namespace Skateshop.Migrations
                     b.ToTable("ShoppingCart");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.TrucksProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.TrucksProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -222,9 +216,6 @@ namespace Skateshop.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
                     b.Property<float>("Weight")
                         .HasColumnType("real");
 
@@ -235,7 +226,7 @@ namespace Skateshop.Migrations
                     b.ToTable("TrucksProduct");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.User", b =>
+            modelBuilder.Entity("Skaterer.Models.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -264,7 +255,7 @@ namespace Skateshop.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.WheelsProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.WheelsProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -292,9 +283,6 @@ namespace Skateshop.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
                     b.Property<float>("Width")
                         .HasColumnType("real");
 
@@ -307,13 +295,13 @@ namespace Skateshop.Migrations
 
             modelBuilder.Entity("DeckProductShoppingCart", b =>
                 {
-                    b.HasOne("Skateshop.Models.DeckProduct", null)
+                    b.HasOne("Skaterer.Models.DeckProduct", null)
                         .WithMany()
                         .HasForeignKey("DeckProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Skateshop.Models.ShoppingCart", null)
+                    b.HasOne("Skaterer.Models.ShoppingCart", null)
                         .WithMany()
                         .HasForeignKey("ShoppingCartsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -322,13 +310,13 @@ namespace Skateshop.Migrations
 
             modelBuilder.Entity("GriptapeProductShoppingCart", b =>
                 {
-                    b.HasOne("Skateshop.Models.GriptapeProduct", null)
+                    b.HasOne("Skaterer.Models.GriptapeProduct", null)
                         .WithMany()
                         .HasForeignKey("GriptapeProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Skateshop.Models.ShoppingCart", null)
+                    b.HasOne("Skaterer.Models.ShoppingCart", null)
                         .WithMany()
                         .HasForeignKey("ShoppingCartsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -337,13 +325,13 @@ namespace Skateshop.Migrations
 
             modelBuilder.Entity("ShoppingCartTrucksProduct", b =>
                 {
-                    b.HasOne("Skateshop.Models.ShoppingCart", null)
+                    b.HasOne("Skaterer.Models.ShoppingCart", null)
                         .WithMany()
                         .HasForeignKey("ShoppingCartsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Skateshop.Models.TrucksProduct", null)
+                    b.HasOne("Skaterer.Models.TrucksProduct", null)
                         .WithMany()
                         .HasForeignKey("TrucksProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -352,58 +340,58 @@ namespace Skateshop.Migrations
 
             modelBuilder.Entity("ShoppingCartWheelsProduct", b =>
                 {
-                    b.HasOne("Skateshop.Models.ShoppingCart", null)
+                    b.HasOne("Skaterer.Models.ShoppingCart", null)
                         .WithMany()
                         .HasForeignKey("ShoppingCartsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Skateshop.Models.WheelsProduct", null)
+                    b.HasOne("Skaterer.Models.WheelsProduct", null)
                         .WithMany()
                         .HasForeignKey("WheelsProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Skateshop.Models.DeckProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.DeckProduct", b =>
                 {
-                    b.HasOne("Skateshop.Models.Brand", "Brand")
+                    b.HasOne("Skaterer.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId");
 
                     b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.GriptapeProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.GriptapeProduct", b =>
                 {
-                    b.HasOne("Skateshop.Models.Brand", "Brand")
+                    b.HasOne("Skaterer.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId");
 
                     b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.TrucksProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.TrucksProduct", b =>
                 {
-                    b.HasOne("Skateshop.Models.Brand", "Brand")
+                    b.HasOne("Skaterer.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId");
 
                     b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.User", b =>
+            modelBuilder.Entity("Skaterer.Models.User", b =>
                 {
-                    b.HasOne("Skateshop.Models.ShoppingCart", "ShoppingCart")
+                    b.HasOne("Skaterer.Models.ShoppingCart", "ShoppingCart")
                         .WithMany()
                         .HasForeignKey("ShoppingCartId");
 
                     b.Navigation("ShoppingCart");
                 });
 
-            modelBuilder.Entity("Skateshop.Models.WheelsProduct", b =>
+            modelBuilder.Entity("Skaterer.Models.WheelsProduct", b =>
                 {
-                    b.HasOne("Skateshop.Models.Brand", "Brand")
+                    b.HasOne("Skaterer.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId");
 

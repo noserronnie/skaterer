@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Skateshop.Data;
-using Skateshop.Models;
+using Skaterer.Data;
+using Skaterer.Models;
 using System;
 using System.Linq;
 
-namespace Skateshop.Services
+namespace Skaterer.Services
 {
     public class AuthService : IAuthService
     {

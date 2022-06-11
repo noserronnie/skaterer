@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Skateshop.Data;
+using Skaterer.Data;
 
-namespace Skateshop.Migrations
+namespace Skaterer.Migrations
 {
     [DbContext(typeof(SkatererContext))]
     [Migration("20220609205812_AddEmailToUserModel")]

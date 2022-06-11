@@ -1,7 +1,7 @@
-﻿using Skateshop.Composite;
+﻿using Skaterer.Products;
 using System.Collections.Generic;
 
-namespace Skateshop.Models
+namespace Skaterer.Models
 {
     public class WheelsProduct : Product
     {

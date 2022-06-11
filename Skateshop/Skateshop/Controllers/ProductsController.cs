@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Skaterer.Data;
 using Skaterer.Services;
-using Skateshop.Composite;
-using Skateshop.Data;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Skateshop.Controllers
+namespace Skaterer.Controllers
 {
     public class ProductsController : Controller
     {

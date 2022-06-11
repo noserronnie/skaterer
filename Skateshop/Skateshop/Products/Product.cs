@@ -1,7 +1,6 @@
-﻿using Skateshop.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using Skaterer.Models;
 
-namespace Skateshop.Composite
+namespace Skaterer.Products
 {
     public class Product
     {
@@ -15,9 +14,6 @@ namespace Skateshop.Composite
         public float Price { get; set; }
 
         public string ImagePath { get; set; }
-
-        [Range(1, 5)]
-        public float Rating { get; set; }
 
     }
 }

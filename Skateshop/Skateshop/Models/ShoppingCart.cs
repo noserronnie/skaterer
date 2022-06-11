@@ -1,7 +1,6 @@
-﻿using Skateshop.Composite;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Skateshop.Models
+namespace Skaterer.Models
 {
     public class ShoppingCart
     {

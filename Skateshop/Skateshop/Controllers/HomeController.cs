@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Skaterer.Models;
 using Skaterer.Services;
-using Skateshop.Data;
-using Skateshop.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Skateshop.Controllers
+namespace Skaterer.Controllers
 {
     public class HomeController : Controller
     {

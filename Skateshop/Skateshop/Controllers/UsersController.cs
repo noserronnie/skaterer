@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Skateshop.Data;
-using Skateshop.Models;
-using Skateshop.Services;
+using Skaterer.Data;
+using Skaterer.Models;
+using Skaterer.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Skateshop.Controllers
+namespace Skaterer.Controllers
 {
     public class UsersController : Controller
     {

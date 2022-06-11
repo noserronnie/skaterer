@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Skaterer.Services;
-using Skateshop.Data;
-using Skateshop.Services;
+using Skaterer.Data;
+using Skaterer.Services;
 
-namespace Skateshop
+namespace Skaterer
 {
     public class Startup
     {

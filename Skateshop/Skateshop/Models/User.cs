@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Skateshop.Models
+namespace Skaterer.Models
 {
     public class User
     {

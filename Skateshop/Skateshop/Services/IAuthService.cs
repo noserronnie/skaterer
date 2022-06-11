@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Skateshop.Models;
+using Skaterer.Models;
 
-namespace Skateshop.Services
+namespace Skaterer.Services
 {
     public interface IAuthService
     {

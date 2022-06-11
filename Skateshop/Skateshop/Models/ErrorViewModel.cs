@@ -1,4 +1,4 @@
-namespace Skateshop.Models
+namespace Skaterer.Models
 {
     public class ErrorViewModel
     {

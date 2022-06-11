@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Skateshop.Migrations
+namespace Skaterer.Migrations
 {
     public partial class AddRatingToProduct : Migration
     {

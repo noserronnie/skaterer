@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Skateshop.Composite;
-using Skateshop.Data;
-using System;
+using Skaterer.Data;
+using Skaterer.Products;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,10 +36,15 @@ namespace Skaterer.Services
         public async Task<List<Product>> GetProductsByRating(int amount)
         {
             var products = await GetProducts();
-            var bestProducts = products
-                .OrderByDescending(p => p.Rating)
-                .Take(amount)
-                .ToList();
+            var ratings = await _context.Rating.ToListAsync();
+
+            var bestProducts = new List<Product>();
+            // Find best products by rating
+
+            
+            // print hello
+            
+
 
             return bestProducts;
         }
