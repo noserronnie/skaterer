@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
 using Skaterer.Products;
-using Skaterer.Services;
+using Skaterer.Services.Auth;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

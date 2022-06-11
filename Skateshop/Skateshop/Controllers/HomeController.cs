@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Skaterer.Models;
-using Skaterer.Services;
+using Skaterer.Services.Products;
 using System.Diagnostics;
 using System.Threading.Tasks;
 

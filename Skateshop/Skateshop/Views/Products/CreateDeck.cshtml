@@ -1,0 +1,74 @@
+﻿@model Skaterer.Models.DeckProduct
+
+@{
+    ViewData["Title"] = "CreateDeck";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CreateDeck</h1>
+
+<h4>DeckProduct</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateDeck">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Width" class="control-label"></label>
+                <input asp-for="Width" class="form-control" />
+                <span asp-validation-for="Width" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Length" class="control-label"></label>
+                <input asp-for="Length" class="form-control" />
+                <span asp-validation-for="Length" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wheelbase" class="control-label"></label>
+                <input asp-for="Wheelbase" class="form-control" />
+                <span asp-validation-for="Wheelbase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nose" class="control-label"></label>
+                <input asp-for="Nose" class="form-control" />
+                <span asp-validation-for="Nose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tail" class="control-label"></label>
+                <input asp-for="Tail" class="form-control" />
+                <span asp-validation-for="Tail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" class="form-control" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
 using Skaterer.Models;
 using Skaterer.Services;
+using Skaterer.Services.Auth;
 using System.Linq;
 using System.Threading.Tasks;
 

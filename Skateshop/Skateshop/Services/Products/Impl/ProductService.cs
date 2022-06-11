@@ -2,10 +2,9 @@
 using Skaterer.Data;
 using Skaterer.Products;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Skaterer.Services
+namespace Skaterer.Services.Products.Impl
 {
     public class ProductService : IProductService
     {

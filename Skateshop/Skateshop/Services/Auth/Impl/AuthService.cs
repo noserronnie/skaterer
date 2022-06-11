@@ -4,7 +4,7 @@ using Skaterer.Models;
 using System;
 using System.Linq;
 
-namespace Skaterer.Services
+namespace Skaterer.Services.Auth.Impl
 {
     public class AuthService : IAuthService
     {

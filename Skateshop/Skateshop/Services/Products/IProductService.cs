@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Skaterer.Products;
 
-namespace Skaterer.Services
+namespace Skaterer.Services.Products
 {
     public interface IProductService
     {

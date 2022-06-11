@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Skaterer.Data;
-using Skaterer.Services;
+using Skaterer.Services.Auth;
+using Skaterer.Services.Products;
 using System.Threading.Tasks;
 
 namespace Skaterer.Controllers
@@ -9,11 +10,13 @@ namespace Skaterer.Controllers
     {
         private readonly SkatererContext _context;
         private readonly IProductService _productService;
+        private readonly IAuthService _authService;
 
-        public ProductsController(SkatererContext context, IProductService productService)
+        public ProductsController(SkatererContext context, IProductService productService, IAuthService authService)
         {
             _context = context;
             _productService = productService;
+            _authService = authService;
         }
 
         public async Task<IActionResult> Index()
@@ -80,6 +83,16 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
             return View(product);
+        }
+
+        public IActionResult CreateDeck()
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+
+            return View();
         }
     }
 }

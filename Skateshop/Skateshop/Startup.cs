@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Skaterer.Services;
 using Skaterer.Data;
-using Skaterer.Services;
+using Skaterer.Services.Auth;
+using Skaterer.Services.Auth.Impl;
+using Skaterer.Services.Products;
+using Skaterer.Services.Products.Impl;
 
 namespace Skaterer
 {
