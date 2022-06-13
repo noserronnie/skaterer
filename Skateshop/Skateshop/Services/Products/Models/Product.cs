@@ -1,6 +1,6 @@
 ﻿using Skaterer.Models;
 
-namespace Skaterer.Products
+namespace Skaterer.Services.Products.Models
 {
     public class Product
     {

@@ -1,0 +1,26 @@
+﻿@model Skaterer.Services.Products.Models.DeleteProductViewModel
+
+@{
+    ViewData["Title"] = "Delete Wheels";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="center-site width-40">
+    <i class="site-icon-danger fas fa-sign-out-alt"></i>
+    <br><br><br>
+
+    <h1>Are you sure you want to delete the wheels?</h1>
+    <br>
+
+    <form asp-controller="Products" asp-action="DeleteWheelsConfirm" asp-route-id="@Model.Id">
+        <div class="form-group">
+            <input type="submit" value="Delete Wheels" class="button button-danger width-100" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

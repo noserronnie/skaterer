@@ -9,6 +9,8 @@ using Skaterer.Services.Auth;
 using Skaterer.Services.Auth.Impl;
 using Skaterer.Services.Products;
 using Skaterer.Services.Products.Impl;
+using System.Globalization;
+using System.Threading;
 
 namespace Skaterer
 {
@@ -48,6 +50,17 @@ namespace Skaterer
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.Use(async (context, next) =>
+            {
+                var currentThreadCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+                currentThreadCulture.NumberFormat = NumberFormatInfo.InvariantInfo;
+
+                Thread.CurrentThread.CurrentCulture = currentThreadCulture;
+                Thread.CurrentThread.CurrentUICulture = currentThreadCulture;
+
+                await next();
+            });
 
             app.UseRouting();
 

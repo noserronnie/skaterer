@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
-using Skaterer.Products;
+using Skaterer.Services.Products.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

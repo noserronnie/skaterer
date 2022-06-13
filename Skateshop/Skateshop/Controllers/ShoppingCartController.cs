@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
-using Skaterer.Products;
+using Skaterer.Services.Products.Models;
 using Skaterer.Services.Auth;
 using System.Collections.Generic;
 using System.Threading.Tasks;

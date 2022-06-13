@@ -113,9 +113,9 @@ namespace Skaterer.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details(long? id)
         {
-            if (id == null || !_authService.IsAdmin(HttpContext))
+            if (id == null || (!_authService.IsAdmin(HttpContext) && _authService.GetUserId(HttpContext) != id))
             {
-                return NotFound();
+                return Unauthorized();
             }
 
             var user = await _context.User

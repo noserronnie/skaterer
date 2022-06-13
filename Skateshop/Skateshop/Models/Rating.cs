@@ -1,4 +1,4 @@
-﻿using Skaterer.Products;
+﻿using Skaterer.Services.Products.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Skaterer.Models

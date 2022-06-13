@@ -118,7 +118,7 @@ namespace Skaterer.Services.Auth.Impl
         public long GetUserId(HttpContext httpContext)
         {
             var username = string.Empty;
-            if (httpContext.Request.Cookies.TryGetValue("identifier", out username))
+            if (httpContext.Request.Cookies.TryGetValue("identifier", out username) && IsAuthorized(httpContext))
             {
                 var id = _context.User.Where(u => u.Username.Equals(username)).First().Id;
                 return id;

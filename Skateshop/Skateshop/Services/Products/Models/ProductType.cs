@@ -1,4 +1,4 @@
-﻿namespace Skaterer.Products
+﻿namespace Skaterer.Services.Products.Models
 {
     public enum ProductType
     {

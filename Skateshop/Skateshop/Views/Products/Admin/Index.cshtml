@@ -1,0 +1,87 @@
+﻿@using Skaterer.Models
+@using Skaterer.Services.Products.Models
+@model IEnumerable<Skaterer.Services.Products.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <div class="row">
+        <div class="col-sm-3">
+            <a class="button button-primary width-100" asp-action="CreateDeck">Add Deck</a>
+        </div>
+        <div class="col-sm-3">
+            <a class="button button-primary width-100" asp-action="CreateTrucks">Add Trucks</a>
+        </div>
+        <div class="col-sm-3">
+            <a class="button button-primary width-100" asp-action="CreateWheels">Add Wheels</a>
+        </div>
+        <div class="col-sm-3">
+            <a class="button button-primary width-100" asp-action="CreateGriptape">Add Griptape</a>
+        </div>
+    </div>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var type = ProductType.DECK;
+            var deleteAction = "DeleteDeck";
+            long id = 0;
+            @if (item is DeckProduct)
+            {
+                id = ((DeckProduct)item).Id;
+            }
+            else if (item is TrucksProduct)
+            {
+                type = ProductType.TRUCKS;
+                deleteAction = "DeleteTrucks";
+                id = ((TrucksProduct)item).Id;
+            }
+            else if (item is WheelsProduct)
+            {
+                type = ProductType.WHEELS;
+                deleteAction = "DeleteWheels";
+                id = ((WheelsProduct)item).Id;
+            }
+            else if (item is GriptapeProduct)
+            {
+                type = ProductType.GRIPTAPE;
+                deleteAction = "DeleteGriptape";
+                id = ((GriptapeProduct)item).Id;
+            }
+            <tr>
+                <td>
+                    @(type)_@id.ToString("0000")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    CHF @item.Price.ToString("0.00")
+                </td>
+                <td class="text-right">
+                    <a class="button button-secondary" asp-action="Edit" asp-route-id="@id">Edit</a>
+                    <a class="button button-secondary" asp-action="Details" asp-route-id="@id">Details</a>
+                    <a class="button button-danger" asp-action="@deleteAction" asp-route-id="@id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

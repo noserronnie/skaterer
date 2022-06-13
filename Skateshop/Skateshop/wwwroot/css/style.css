@@ -41,6 +41,7 @@
 }
 
 .button-danger:hover {
+    color: #fff;
     background-color: #c71f37;
 }
 
