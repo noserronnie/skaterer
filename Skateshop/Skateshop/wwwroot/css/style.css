@@ -25,7 +25,7 @@
 
 .button-secondary {
     color: #999;
-    background-color: #fff;
+    background-color: rgb(0 0 0 / 0.00);
     border: 1px solid #999;
 }
 
@@ -43,6 +43,19 @@
 .button-danger:hover {
     color: #fff;
     background-color: #c71f37;
+}
+
+.invisiblebutton-container .button {
+    visibility: hidden;
+    transition: opacity 2s linear;
+}
+
+.invisiblebutton-container:hover {
+    background-color: #f3f3f3;
+}
+
+.invisiblebutton-container:hover .button {
+    visibility: visible;
 }
 
 /* Rating Star */

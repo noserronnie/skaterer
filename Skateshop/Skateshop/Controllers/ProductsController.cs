@@ -219,7 +219,7 @@ namespace Skaterer.Controllers
                 return Unauthorized();
             }
 
-            return View("Admin/DeleteDeck", new DeleteProductViewModel(id, ProductType.DECK));
+            return View("Admin/Delete", new DeleteProductViewModel(id, ProductType.DECK));
         }
 
         [HttpPost("Products/DeleteDeck/{id}")]
@@ -245,7 +245,7 @@ namespace Skaterer.Controllers
                 return Unauthorized();
             }
 
-            return View("Admin/DeleteTrucks", new DeleteProductViewModel(id, ProductType.TRUCKS));
+            return View("Admin/Delete", new DeleteProductViewModel(id, ProductType.TRUCKS));
         }
 
         [HttpPost("Products/DeleteTrucks/{id}")]
@@ -271,7 +271,7 @@ namespace Skaterer.Controllers
                 return Unauthorized();
             }
 
-            return View("Admin/DeleteWheels", new DeleteProductViewModel(id, ProductType.WHEELS));
+            return View("Admin/Delete", new DeleteProductViewModel(id, ProductType.WHEELS));
         }
 
         [HttpPost("Products/DeleteWheels/{id}")]
@@ -297,7 +297,7 @@ namespace Skaterer.Controllers
                 return Unauthorized();
             }
 
-            return View("Admin/DeleteGriptape", new DeleteProductViewModel(id, ProductType.GRIPTAPE));
+            return View("Admin/Delete", new DeleteProductViewModel(id, ProductType.GRIPTAPE));
         }
 
         [HttpPost("Products/DeleteGriptape/{id}")]

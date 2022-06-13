@@ -1,0 +1,27 @@
+﻿@model Skaterer.Services.Products.Models.DeleteProductViewModel
+
+@{
+    var type = Model.Type.ToString()[0] + Model.Type.ToString().Substring(1).ToLower();
+    ViewData["Title"] = "Delete " + type;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="center-site width-40">
+    <i class="site-icon-danger fas fa-trash"></i>
+    <br><br><br>
+
+    <h1>Are you sure you want to delete the @type?</h1>
+    <br>
+
+    <form asp-controller="Products" asp-action="Delete@(type)Confirm" asp-route-id="@Model.Id">
+        <div class="form-group">
+            <input type="submit" value="Delete @type" class="button button-danger width-100" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
