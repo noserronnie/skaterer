@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Skaterer.Data;
 
 namespace Skaterer.Migrations
 {
     [DbContext(typeof(SkatererContext))]
-    partial class SkateshopContextModelSnapshot : ModelSnapshot
+    [Migration("20220614065659_ChangeRatingStarsToDouble")]
+    partial class ChangeRatingStarsToDouble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -8,5 +8,6 @@ namespace Skaterer.Services.Products
     {
         Task<List<Product>> GetProducts();
         Task<List<Product>> GetProductsByRating(int amount);
+        double GetProductRating(Product product);
     }
 }

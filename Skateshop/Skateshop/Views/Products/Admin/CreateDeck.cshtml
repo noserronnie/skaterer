@@ -5,57 +5,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateDeck</h1>
+<a class="button button-secondary" asp-action="Index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
 
-<h4>DeckProduct</h4>
-<hr />
+<h1>New Deck</h1>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateDeck">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Width" class="control-label"></label>
-                <input asp-for="Width" class="form-control" />
+                <input asp-for="Width" placeholder="8.4" class="form-control" />
                 <span asp-validation-for="Width" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Length" class="control-label"></label>
-                <input asp-for="Length" class="form-control" />
+                <input asp-for="Length" placeholder="31.5" class="form-control" />
                 <span asp-validation-for="Length" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Wheelbase" class="control-label"></label>
-                <input asp-for="Wheelbase" class="form-control" />
+                <input asp-for="Wheelbase" placeholder="7.2" class="form-control" />
                 <span asp-validation-for="Wheelbase" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nose" class="control-label"></label>
-                <input asp-for="Nose" class="form-control" />
+                <input asp-for="Nose" placeholder="6.5" class="form-control" />
                 <span asp-validation-for="Nose" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tail" class="control-label"></label>
-                <input asp-for="Tail" class="form-control" />
+                <input asp-for="Tail" placeholder="5.5" class="form-control" />
                 <span asp-validation-for="Tail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" placeholder="Name..." class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <input asp-for="Description" placeholder="Description..." class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+                <input asp-for="Price" placeholder="79.9" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
+                <input asp-for="ImagePath" placeholder="https://example.com/img/image.png" class="form-control" />
                 <span asp-validation-for="ImagePath" class="text-danger"></span>
             </div>
             <div class="form-group">

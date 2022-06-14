@@ -1,67 +1,85 @@
 ﻿@model Skaterer.Models.TrucksProduct
 
 @using Skaterer.Services.Auth
+@using Skaterer.Services.Products
 @inject IAuthService authService
+@inject IProductService productService
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var rating = productService.GetProductRating(Model);
 }
 
-<h1>@Model.Name</h1>
-
 <div>
-    <h4>@Model.Description</h4>
-    <hr />
+    <a class="button button-secondary" asp-action="Index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <img src="@Model.ImagePath" style="width: 100%;" />
         </div>
-        <div class="col-sm-8">
-            <dl class="row">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Price)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Price) CHF
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.AxleWidth)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.AxleWidth)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.HangerWidth)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.HangerWidth)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Height)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Height)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Weight)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Weight)
-                </dd>
-            </dl>
+        <div class="col-sm-7">
+            <h1>@Model.Name</h1>
+            <h4>CHF @Model.Price.ToString("0.00")</h4>
+            <div class="rating">
+                @for (var i = 0; i < rating; i++)
+                {
+                    <span class="fa fa-star star-checked"></span>
+                }
+                @for (var i = 0; i < 5 - rating; i++)
+                {
+                    <span class="fa fa-star star-unchecked"></span>
+                }
+                <span>(4.4 Stars)</span>
+            </div>
+            <hr />
+
             @if (authService.IsAuthorized(Context))
             {
-                <a class="btn btn-primary" asp-area="" asp-controller="ShoppingCart" asp-action="AddTrucksProduct" asp-route-id="@Model.Id" style="width: 100%">Add to Shopping Cart</a>
+                <a class="button button-primary" asp-area="" asp-controller="ShoppingCart" asp-action="AddTrucksProduct" asp-route-id="@Model.Id" style="width: 100%">Add to Shopping Cart</a>
             }
             else
             {
-                <a class="btn btn-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
+                <a class="button button-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
             }
+            <a class="button button-secondary" asp-area="" asp-controller="" asp-action="" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
+            <hr />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Specifications</h4>
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.AxleWidth)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.AxleWidth)"
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.HangerWidth)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.HangerWidth)"
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.Height)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.Height)"
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.Weight)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.Weight)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-6">
+                    <h4>Description</h4>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
         </div>
     </div>
 
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>

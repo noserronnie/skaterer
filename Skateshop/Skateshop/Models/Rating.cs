@@ -12,7 +12,7 @@ namespace Skaterer.Models
 
         [Range(1, 5)]
         [Required]
-        public long Stars { get; set; }
+        public double Stars { get; set; }
 
         [Required]
         public long ProductId { get; set; }

@@ -63,29 +63,43 @@ namespace Skaterer.Services.Products.Impl
             return bestProducts;
         }
 
-        private long GetProductRating(Product product)
+        public double GetProductRating(Product product)
         {
             var ratings = _context.Rating.ToList();
-            var rating = (long) 0.0;
+            var rating = 0.0;
 
             try
             {
                 if (product is DeckProduct)
                 {
-                    rating = ratings.Find(r => r.ProductType == ProductType.DECK && r.Id == ((DeckProduct)product).Id).Stars;
+                    ratings = ratings
+                        .Where(r => r.ProductType == ProductType.DECK && r.ProductId == ((DeckProduct)product).Id)
+                        .ToList();
                 }
                 else if (product is TrucksProduct)
                 {
-                    rating = ratings.Find(r => r.ProductType == ProductType.TRUCKS && r.Id == ((TrucksProduct)product).Id).Stars;
+                    ratings = ratings
+                        .Where(r => r.ProductType == ProductType.TRUCKS && r.ProductId == ((TrucksProduct)product).Id)
+                        .ToList();
                 }
                 else if (product is WheelsProduct)
                 {
-                    rating = ratings.Find(r => r.ProductType == ProductType.WHEELS && r.Id == ((WheelsProduct)product).Id).Stars;
+                    ratings = ratings
+                        .Where(r => r.ProductType == ProductType.WHEELS && r.ProductId == ((WheelsProduct)product).Id)
+                        .ToList();
                 }
                 else if (product is GriptapeProduct)
                 {
-                    rating = ratings.Find(r => r.ProductType == ProductType.GRIPTAPE && r.Id == ((GriptapeProduct)product).Id).Stars;
+                    ratings = ratings
+                        .Where(r => r.ProductType == ProductType.GRIPTAPE && r.ProductId == ((GriptapeProduct)product).Id)
+                        .ToList();
                 }
+
+                foreach (var stars in ratings.Select(r => r.Stars))
+                {
+                    rating += stars;
+                }
+                rating /= ratings.Count;
             }
             catch (NullReferenceException)
             {

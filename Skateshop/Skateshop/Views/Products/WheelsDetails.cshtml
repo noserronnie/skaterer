@@ -1,12 +1,14 @@
 ﻿@model Skaterer.Models.WheelsProduct
 
 @using Skaterer.Services.Auth
+@using Skaterer.Services.Products
 @inject IAuthService authService
+@inject IProductService productService
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var rating = Math.Round(4.4, 0, MidpointRounding.AwayFromZero);
+    var rating = productService.GetProductRating(Model);
 }
 
 <div>
@@ -27,7 +29,7 @@
                 {
                     <span class="fa fa-star star-unchecked"></span>
                 }
-                <span>(4.4 Stars)</span>
+                <span>(@rating.ToString("0.0") Stars)</span>
             </div>
             <hr />
 
