@@ -68,43 +68,41 @@ namespace Skaterer.Services.Products.Impl
             var ratings = _context.Rating.ToList();
             var rating = 0.0;
 
-            try
+            if (product is DeckProduct)
             {
-                if (product is DeckProduct)
-                {
-                    ratings = ratings
-                        .Where(r => r.ProductType == ProductType.DECK && r.ProductId == ((DeckProduct)product).Id)
-                        .ToList();
-                }
-                else if (product is TrucksProduct)
-                {
-                    ratings = ratings
-                        .Where(r => r.ProductType == ProductType.TRUCKS && r.ProductId == ((TrucksProduct)product).Id)
-                        .ToList();
-                }
-                else if (product is WheelsProduct)
-                {
-                    ratings = ratings
-                        .Where(r => r.ProductType == ProductType.WHEELS && r.ProductId == ((WheelsProduct)product).Id)
-                        .ToList();
-                }
-                else if (product is GriptapeProduct)
-                {
-                    ratings = ratings
-                        .Where(r => r.ProductType == ProductType.GRIPTAPE && r.ProductId == ((GriptapeProduct)product).Id)
-                        .ToList();
-                }
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.DECK && r.ProductId == ((DeckProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is TrucksProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.TRUCKS && r.ProductId == ((TrucksProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is WheelsProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.WHEELS && r.ProductId == ((WheelsProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is GriptapeProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.GRIPTAPE && r.ProductId == ((GriptapeProduct)product).Id)
+                    .ToList();
+            }
 
-                foreach (var stars in ratings.Select(r => r.Stars))
-                {
-                    rating += stars;
-                }
-                rating /= ratings.Count;
-            }
-            catch (NullReferenceException)
+            if (ratings.Count == 0)
             {
-                rating = 3;
+                return 3.6;
             }
+
+            foreach (var stars in ratings.Select(r => r.Stars))
+            {
+                rating += stars;
+            }
+            rating /= ratings.Count;
 
             return rating;
         }

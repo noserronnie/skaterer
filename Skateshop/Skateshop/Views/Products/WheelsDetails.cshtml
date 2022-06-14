@@ -25,7 +25,7 @@
                 {
                     <span class="fa fa-star star-checked"></span>
                 }
-                @for (var i = 0; i < 5 - rating; i++)
+                @for (var i = 0; i < 4 - rating; i++)
                 {
                     <span class="fa fa-star star-unchecked"></span>
                 }
@@ -49,22 +49,22 @@
                     <h4>Specifications</h4>
                     <dl class="row">
                         <dt class="col-sm-6">
-                            @Html.DisplayNameFor(model => model.Width)
-                        </dt>
-                        <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.Width)
-                        </dd>
-                        <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.Diameter)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.Diameter)
+                            @Html.DisplayFor(model => model.Diameter) mm
+                        </dd>
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(model => model.Width)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(model => model.Width) mm
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.Hardness)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.Hardness)
+                            @Html.DisplayFor(model => model.Hardness)A
                         </dd>
                     </dl>
                 </div>

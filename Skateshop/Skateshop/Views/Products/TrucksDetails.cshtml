@@ -25,11 +25,11 @@
                 {
                     <span class="fa fa-star star-checked"></span>
                 }
-                @for (var i = 0; i < 5 - rating; i++)
+                @for (var i = 0; i < 4 - rating; i++)
                 {
                     <span class="fa fa-star star-unchecked"></span>
                 }
-                <span>(4.4 Stars)</span>
+                <span>(@rating.ToString("0.0") Stars)</span>
             </div>
             <hr />
 
@@ -64,13 +64,13 @@
                             @Html.DisplayNameFor(model => model.Height)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.Height)"
+                            @Html.DisplayFor(model => model.Height) mm
                         </dd>
                         <dt class="col-sm-6">
                             @Html.DisplayNameFor(model => model.Weight)
                         </dt>
                         <dd class="col-sm-6">
-                            @Html.DisplayFor(model => model.Weight)
+                            @Html.DisplayFor(model => model.Weight) g
                         </dd>
                     </dl>
                 </div>
