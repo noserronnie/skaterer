@@ -5,22 +5,30 @@
     ViewData["Title"] = "Skaterer";
 }
 
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1597270514152-b2cf6d48c340?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c2thdGVwYXJrfGVufDB8fDB8fA%3D%3D&w=1000&q=80');
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-size: cover;
+         }
+</style>
+
 <div>
     <div class="row">
-        <div class="col-lg-4 col-md-12 mb-4">
+        <div class="col-lg-4 col-md-12 mb-4" style="text-align: left">
             <img src="~/img/home-tall1.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-wide1.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-tall4.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-wide4.png" class="img-fluid mb-4" alt="">
         </div>
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4" style="text-align: center">
             <img src="~/img/home-wide2.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-tall2.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-wide5.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-tall5.png" class="img-fluid mb-4" alt="">
-
         </div>
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4" style="text-align: right">
             <img src="~/img/home-tall3.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-wide3.png" class="img-fluid mb-4" alt="">
             <img src="~/img/home-tall6.png" class="img-fluid mb-4" alt="">
@@ -28,8 +36,8 @@
         </div>
     </div>
 
-    <div class="row" style="text-decoration: underline" width: 100%">
-        <h2> &#11088; Top Articles</h2>
+    <div class="row" width: 100%">
+        <h2 class="text-light" style="text-align: center"> Top Articles</h2>
     </div>
         <div class="row">
             @foreach (var item in Model)
