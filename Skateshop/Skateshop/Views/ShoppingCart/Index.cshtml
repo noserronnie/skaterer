@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     float sum = 0;
 }
-<h1> &#128722;Shopping Cart</h1>
+<h1><i class="fas fa-shopping-cart"></i> Shopping Cart</h1>
 
 <div class="row">
     @foreach (var item in Model)
@@ -15,35 +15,27 @@
             <div class="card" style="width: 100%; height: 100%">
                 <img class="card-img-top" src="@item.ImagePath" alt="Product Image">
                 <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Price CHF</p>
+                    <h5 class="card-title" style="min-height: 50px">@item.Name</h5>
+                    <h6 class="card-text">CHF @item.Price.ToString("0.00")</h6>
                     @if (item is DeckProduct)
                     {
                         var deckProduct = (DeckProduct)item;
-                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
-                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveDeckProduct" asp-route-id="@deckProduct.Id">Remove</a>
-                        sum += deckProduct.Price;
+                        <a class="button button-primary" style="width: 100%; margin-bottom: 0 auto" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
                     }
                     else if (item is TrucksProduct)
                     {
                         var trucksProduct = (TrucksProduct)item;
-                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
-                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveTrucksProduct" asp-route-id="@trucksProduct.Id">Remove</a>
-                        sum += trucksProduct.Price;
+                        <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
                     }
                     else if (item is WheelsProduct)
                     {
                         var wheelsProduct = (WheelsProduct)item;
-                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
-                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveWheelsProduct" asp-route-id="@wheelsProduct.Id">Remove</a>
-                        sum += wheelsProduct.Price;
+                        <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
                     }
                     else if (item is GriptapeProduct)
                     {
                         var griptapeProduct = (GriptapeProduct)item;
-                        <a class="btn btn-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
-                        <a class="btn btn-danger" style="width: 100%; margin-bottom: 0 auto" asp-action="RemoveGriptapeProduct" asp-route-id="@griptapeProduct.Id">Remove</a>
-                        sum += griptapeProduct.Price;
+                        <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
                     }
                 </div>
             </div>
