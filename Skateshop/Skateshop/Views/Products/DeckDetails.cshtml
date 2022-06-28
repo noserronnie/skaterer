@@ -9,6 +9,8 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var rating = productService.GetProductRating(Model);
+    var stars = 0;
+    var ratings = productService.GetRatingsOfProduct(Model);
 }
 
 <div>
@@ -20,17 +22,32 @@
         <div class="col-sm-7">
             <h1>@Model.Name</h1>
             <h4>CHF @Model.Price.ToString("0.00")</h4>
-            <div class="rating">
-                @for (var i = 0; i < rating; i++)
-                {
-                    <span class="fa fa-star star-checked"></span>
-                }
-                @for (var i = 0; i < 4 - rating; i++)
-                {
-                    <span class="fa fa-star star-unchecked"></span>
-                }
-                <span>(@rating.ToString("0.0") Stars)</span>
-            </div>
+            @if (productService.HasRatings(Model))
+            {
+                <div class="rating">
+
+                    @for (var i = 0; i < rating; i++)
+                    {
+                        stars++;
+                        <span class="fa fa-star star-checked"></span>
+                    }
+                    @for (var i = 0; i < 5 - stars; i++)
+                    {
+                        <span class="fa fa-star star-unchecked"></span>
+                    }
+                    <span>(@rating.ToString("0.0") Stars)</span>
+                </div>
+            }
+            else
+            {
+                <div class="rating">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <span class="fa fa-star star-disabled"></span>
+                    }
+                    <span>(No Ratings)</span>
+                </div>
+            }
             <hr />
 
             @if (authService.IsAuthorized(Context))
@@ -41,7 +58,7 @@
             {
                 <a class="button button-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
             }
-            <a class="button button-secondary" asp-area="" asp-controller="" asp-action="" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
+            <a class="button button-secondary" asp-area="" asp-controller="Ratings" asp-action="RateDeck" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
             <hr />
 
             <div class="row">
@@ -84,11 +101,40 @@
                     <h4>Description</h4>
                     <p>@Model.Description</p>
                 </div>
-                <div class="col-sm-6">
-                    <img style="width: 100%" src="https://contenthub.blue-tomato.com/site/assets/files/2625/skate-construction-1531380277.svg"/>
+                <div class="col-sm-12">
+                    <img style="width: 100%" src="https://contenthub.blue-tomato.com/site/assets/files/2625/skate-construction-1531380277.svg" />
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        <h3>Ratings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Bewertung</th>
+                    <th>Text</th>
+                </tr>
+            </thead>
+            @foreach (var r in ratings)
+            {
+                <tbody>
+                    <tr>
+                        <td class="col-sm-3">
+                            @r.Author.Username
+                        </td>
+                        <td class="col-sm-3">
+                            @r.Stars
+                        </td>
+                        <td class="col-sm-6">
+                            @r.Text
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
     </div>
 
 </div>

@@ -1,0 +1,58 @@
+﻿@model Skaterer.Models.GriptapeProduct
+
+@{
+    ViewData["Title"] = "EditGriptape";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="width-60" style="margin: 0 auto">
+    <h1>Edit Griptape</h1>
+
+    <hr />
+
+    <form asp-action="EditGriptape" asp-route-id="@Model.Id">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" placeholder="Name..." value="@Model.Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" placeholder="Description..." value="@Model.Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" placeholder="00.00" value="@Model.Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Width" class="control-label">Width in inches</label>
+            <input asp-for="Width" placeholder="0.0" value="@Model.Width" class="form-control" />
+            <span asp-validation-for="Width" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Length" class="control-label">Length in inches</label>
+            <input asp-for="Length" placeholder="0.0" value="@Model.Length" class="form-control" />
+            <span asp-validation-for="Length" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImagePath" class="control-label">Image Path</label>
+            <input asp-for="ImagePath" placeholder="https://example.com/img/image.png" value="@Model.ImagePath" class="form-control" />
+            <span asp-validation-for="ImagePath" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a asp-action="IndexAdmin" class="button button-danger width-100">Cancel</a>
+            </div>
+            <div class="col-sm-6">
+                <input type="submit" value="Save Changes" class="button button-primary width-100" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

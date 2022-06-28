@@ -38,7 +38,6 @@ namespace Skaterer.Services.Products.Impl
         public async Task<List<Product>> GetProductsByRating(int amount)
         {
             var products = await GetProducts();
-            var ratings = await _context.Rating.ToListAsync();
             var bestProducts = new List<Product>();
 
             for (var i = 0; i < products.Count; i++)
@@ -61,6 +60,38 @@ namespace Skaterer.Services.Products.Impl
             }
 
             return bestProducts;
+        }
+
+        public List<Rating> GetRatingsOfProduct(Product product)
+        {
+            var ratings = _context.Rating.Include(r => r.Author).ToList();
+
+            if (product is DeckProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.DECK && r.ProductId == ((DeckProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is TrucksProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.TRUCKS && r.ProductId == ((TrucksProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is WheelsProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.WHEELS && r.ProductId == ((WheelsProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is GriptapeProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.GRIPTAPE && r.ProductId == ((GriptapeProduct)product).Id)
+                    .ToList();
+            }
+
+            return ratings;
         }
 
         public double GetProductRating(Product product)
@@ -105,6 +136,43 @@ namespace Skaterer.Services.Products.Impl
             rating /= ratings.Count;
 
             return rating;
+        }
+
+        public bool HasRatings(Product product)
+        {
+            var ratings = _context.Rating.ToList();
+
+            if (product is DeckProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.DECK && r.ProductId == ((DeckProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is TrucksProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.TRUCKS && r.ProductId == ((TrucksProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is WheelsProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.WHEELS && r.ProductId == ((WheelsProduct)product).Id)
+                    .ToList();
+            }
+            else if (product is GriptapeProduct)
+            {
+                ratings = ratings
+                    .Where(r => r.ProductType == ProductType.GRIPTAPE && r.ProductId == ((GriptapeProduct)product).Id)
+                    .ToList();
+            }
+
+            if (ratings.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }

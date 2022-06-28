@@ -17,26 +17,31 @@
                 <div class="card-body">
                     <h5 class="card-title" style="min-height: 50px">@item.Name</h5>
                     <h6 class="card-text">CHF @item.Price.ToString("0.00")</h6>
-                    @if (item is DeckProduct)
-                    {
-                        var deckProduct = (DeckProduct)item;
-                        <a class="button button-primary" style="width: 100%; margin-bottom: 0 auto" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
-                    }
-                    else if (item is TrucksProduct)
-                    {
-                        var trucksProduct = (TrucksProduct)item;
-                        <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
-                    }
-                    else if (item is WheelsProduct)
-                    {
-                        var wheelsProduct = (WheelsProduct)item;
-                        <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
-                    }
-                    else if (item is GriptapeProduct)
-                    {
-                        var griptapeProduct = (GriptapeProduct)item;
-                        <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
-                    }
+                    <div class="col-sm-6">
+                        @if (item is DeckProduct)
+                        {
+                            var deckProduct = (DeckProduct)item;
+                            <a class="button button-primary" style="width: 100%; margin-bottom: 0 auto" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
+                        }
+                        else if (item is TrucksProduct)
+                        {
+                            var trucksProduct = (TrucksProduct)item;
+                            <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
+                        }
+                        else if (item is WheelsProduct)
+                        {
+                            var wheelsProduct = (WheelsProduct)item;
+                            <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
+                        }
+                        else if (item is GriptapeProduct)
+                        {
+                            var griptapeProduct = (GriptapeProduct)item;
+                            <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                        }
+                    </div>
+                    <div class="col-6-sm">
+                        <a class="button button-danger" style="width: 100%; bottom: 0" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,9 @@ namespace Skaterer.Models
         [Required]
         public User Author { get; set; }
 
+        [Required]
+        public long UserId { get; set; }
+
         [Range(1, 5)]
         [Required]
         public double Stars { get; set; }
