@@ -42,22 +42,22 @@
                             @if (item is DeckProduct)
                             {
                                 var deckProduct = (DeckProduct)item;
-                                <a class="button button-primary" style="width: 100%; margin-bottom: 0 auto" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
+                                <a class="button button-primary" style="width: 100%; margin-bottom: 0 auto" asp-controller="Products" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
                             }
                             else if (item is TrucksProduct)
                             {
                                 var trucksProduct = (TrucksProduct)item;
-                                <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
+                                <a class="button button-primary" style="width: 100%; bottom: 0" asp-controller="Products" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
                             }
                             else if (item is WheelsProduct)
                             {
                                 var wheelsProduct = (WheelsProduct)item;
-                                <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
+                                <a class="button button-primary" style="width: 100%; bottom: 0" asp-controller="Products" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
                             }
                             else if (item is GriptapeProduct)
                             {
                                 var griptapeProduct = (GriptapeProduct)item;
-                                <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                                <a class="button button-primary" style="width: 100%; bottom: 0" asp-controller="Products" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
                             }
                         </div>
                     </div>

@@ -49,7 +49,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            var product = await _context.DeckProduct.FindAsync(id);
+            var product = await _context.TrucksProduct.FindAsync(id);
             if (product == null)
             {
                 return NotFound();

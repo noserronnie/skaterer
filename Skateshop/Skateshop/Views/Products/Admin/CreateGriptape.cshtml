@@ -5,53 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateGriptape</h1>
+<div class="width-60" style="margin: 0 auto">
+    <h1>New Griptape</h1>
 
-<h4>GriptapeProduct</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateGriptape">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Width" class="control-label"></label>
-                <input asp-for="Width" class="form-control" />
-                <span asp-validation-for="Width" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Length" class="control-label"></label>
-                <input asp-for="Length" class="form-control" />
-                <span asp-validation-for="Length" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <form asp-action="CreateGriptape">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" placeholder="Name..." class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" placeholder="Description..." class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" placeholder="00.00" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Width" class="control-label">Width in inches</label>
+            <input asp-for="Width" placeholder="0.0" class="form-control" />
+            <span asp-validation-for="Width" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Length" class="control-label">Length in inches</label>
+            <input asp-for="Length" placeholder="0.0" class="form-control" />
+            <span asp-validation-for="Length" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImagePath" class="control-label">Image Path</label>
+            <input asp-for="ImagePath" placeholder="https://example.com/img/image.png" class="form-control" />
+            <span asp-validation-for="ImagePath" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a asp-action="IndexAdmin" class="button button-danger width-100">Cancel</a>
+            </div>
+            <div class="col-sm-6">
+                <input type="submit" value="Create" class="button button-primary width-100" />
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
