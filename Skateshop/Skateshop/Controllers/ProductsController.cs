@@ -49,7 +49,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            var product = await _context.DeckProduct.FindAsync(id);
+            var product = await _context.TrucksProduct.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -127,6 +127,56 @@ namespace Skaterer.Controllers
             return await IndexAdmin();
         }
 
+        [HttpGet("Products/EditDeck")]
+        public async Task<IActionResult> EditDeck(long id)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+
+            var product = await _context.DeckProduct.FindAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return View("Admin/EditDeck", product);
+        }
+
+        [HttpPost("Products/EditDeck")]
+        public async Task<IActionResult> EditDeck(long id, DeckProduct product)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            var updatedProduct = await _context.DeckProduct.FindAsync(id);
+            if (updatedProduct is null)
+            {
+                return NotFound();
+            }
+
+            updatedProduct.Name = product.Name;
+            updatedProduct.Description = product.Description;
+            updatedProduct.Price = product.Price;
+            updatedProduct.Width = product.Width;
+            updatedProduct.Length = product.Length;
+            updatedProduct.Wheelbase = product.Wheelbase;
+            updatedProduct.Tail = product.Tail;
+            updatedProduct.Nose = product.Nose;
+            updatedProduct.ImagePath = product.ImagePath;
+
+            _context.DeckProduct.Update(updatedProduct);
+            await _context.SaveChangesAsync();
+            return await IndexAdmin();
+        }
+
         [HttpGet("Products/CreateTrucks")]
         public IActionResult CreateTrucks()
         {
@@ -151,6 +201,55 @@ namespace Skaterer.Controllers
             }
 
             _context.TrucksProduct.Add(product);
+            await _context.SaveChangesAsync();
+            return await IndexAdmin();
+        }
+
+        [HttpGet("Products/EditTrucks")]
+        public async Task<IActionResult> EditTrucks(long id)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+
+            var product = await _context.TrucksProduct.FindAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return View("Admin/EditTrucks", product);
+        }
+
+        [HttpPost("Products/EditTrucks")]
+        public async Task<IActionResult> EditTrucks(long id, TrucksProduct product)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            var updatedProduct = await _context.TrucksProduct.FindAsync(id);
+            if (updatedProduct is null)
+            {
+                return NotFound();
+            }
+
+            updatedProduct.Name = product.Name;
+            updatedProduct.Description = product.Description;
+            updatedProduct.Price = product.Price;
+            updatedProduct.AxleWidth = product.AxleWidth;
+            updatedProduct.HangerWidth = product.HangerWidth;
+            updatedProduct.Height = product.Height;
+            updatedProduct.Weight = product.Weight;
+            updatedProduct.ImagePath = product.ImagePath;
+
+            _context.TrucksProduct.Update(updatedProduct);
             await _context.SaveChangesAsync();
             return await IndexAdmin();
         }
@@ -183,6 +282,54 @@ namespace Skaterer.Controllers
             return await IndexAdmin();
         }
 
+        [HttpGet("Products/EditWheels")]
+        public async Task<IActionResult> EditWheels(long id)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+
+            var product = await _context.WheelsProduct.FindAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return View("Admin/EditWheels", product);
+        }
+
+        [HttpPost("Products/EditWheels")]
+        public async Task<IActionResult> EditWheels(long id, WheelsProduct product)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            var updatedProduct = await _context.WheelsProduct.FindAsync(id);
+            if (updatedProduct is null)
+            {
+                return NotFound();
+            }
+
+            updatedProduct.Name = product.Name;
+            updatedProduct.Description = product.Description;
+            updatedProduct.Price = product.Price;
+            updatedProduct.Diameter = product.Diameter;
+            updatedProduct.Hardness = product.Hardness;
+            updatedProduct.Width = product.Width;
+            updatedProduct.ImagePath = product.ImagePath;
+
+            _context.WheelsProduct.Update(updatedProduct);
+            await _context.SaveChangesAsync();
+            return await IndexAdmin();
+        }
+
         [HttpGet("Products/CreateGriptape")]
         public IActionResult CreateGriptape()
         {
@@ -207,6 +354,53 @@ namespace Skaterer.Controllers
             }
 
             _context.GriptapeProduct.Add(product);
+            await _context.SaveChangesAsync();
+            return await IndexAdmin();
+        }
+
+        [HttpGet("Products/EditGriptape")]
+        public async Task<IActionResult> EditGriptape(long id)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+
+            var product = await _context.GriptapeProduct.FindAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return View("Admin/EditGriptape", product);
+        }
+
+        [HttpPost("Products/EditGriptape")]
+        public async Task<IActionResult> EditGriptape(long id, GriptapeProduct product)
+        {
+            if (!_authService.IsAdmin(HttpContext))
+            {
+                return Unauthorized();
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            var updatedProduct = await _context.GriptapeProduct.FindAsync(id);
+            if (updatedProduct is null)
+            {
+                return NotFound();
+            }
+
+            updatedProduct.Name = product.Name;
+            updatedProduct.Description = product.Description;
+            updatedProduct.Price = product.Price;
+            updatedProduct.Width = product.Width;
+            updatedProduct.Length = product.Length;
+            updatedProduct.ImagePath = product.ImagePath;
+
+            _context.GriptapeProduct.Update(updatedProduct);
             await _context.SaveChangesAsync();
             return await IndexAdmin();
         }

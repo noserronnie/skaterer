@@ -6,10 +6,8 @@
 }
 
 <div class="center-site width-40">
-        <i class="fa fa-sign-in" style="font-size:200px;color:grey"></i>
+        <i class="fa fa-sign-in site-icon" style="font-size:200px"></i>
     <br><br><br>
-
-    <br>
 
     <form asp-action="Login">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,7 +20,7 @@
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input style="background-color: grey;" type="submit" value="Login" class="button button-primary width-100" />
+            <input type="submit" value="Login" class="button button-primary width-100" />
         </div>
         <p class="text-danger">@ViewBag.Error</p>
     </form>

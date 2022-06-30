@@ -5,58 +5,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateWheels</h1>
+<div class="width-60" style="margin: 0 auto">
+    <h1>New Wheels</h1>
 
-<h4>WheelsProduct</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateWheels">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Diameter" class="control-label"></label>
-                <input asp-for="Diameter" class="form-control" />
-                <span asp-validation-for="Diameter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Width" class="control-label"></label>
-                <input asp-for="Width" class="form-control" />
-                <span asp-validation-for="Width" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Hardness" class="control-label"></label>
-                <input asp-for="Hardness" class="form-control" />
-                <span asp-validation-for="Hardness" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <form asp-action="CreateWheels">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" placeholder="Name..." class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" placeholder="Description..." class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" placeholder="00.00" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Width" class="control-label">Width in mm</label>
+            <input asp-for="Width" placeholder="0.0" class="form-control" />
+            <span asp-validation-for="Width" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Diameter" class="control-label">Diameter in mm</label>
+            <input asp-for="Diameter" placeholder="0.0" class="form-control" />
+            <span asp-validation-for="Diameter" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Hardness" class="control-label"></label>
+            <input asp-for="Hardness" placeholder="0.0" class="form-control" />
+            <span asp-validation-for="Hardness" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImagePath" class="control-label">Image Path</label>
+            <input asp-for="ImagePath" placeholder="https://example.com/img/image.png" class="form-control" />
+            <span asp-validation-for="ImagePath" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a asp-action="IndexAdmin" class="button button-danger width-100">Cancel</a>
+            </div>
+            <div class="col-sm-6">
+                <input type="submit" value="Create" class="button button-primary width-100" />
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

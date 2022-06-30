@@ -1,55 +1,55 @@
 ﻿@model Skaterer.Models.TrucksProduct
 
 @{
-    ViewData["Title"] = "CreateTrucks";
+    ViewData["Title"] = "EditTrucks";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="width-60" style="margin: 0 auto">
-    <h1>New Trucks</h1>
+    <h1>Edit Trucks</h1>
 
     <hr />
 
-    <form asp-action="CreateTrucks">
+    <form asp-action="EditTrucks" asp-route-id="@Model.Id">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" placeholder="Name..." class="form-control" />
+            <input asp-for="Name" placeholder="Name..." value="@Model.Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Description" class="control-label"></label>
-            <input asp-for="Description" placeholder="Description..." class="form-control" />
+            <input asp-for="Description" placeholder="Description..." value="@Model.Description" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Price" class="control-label"></label>
-            <input asp-for="Price" placeholder="00.00" class="form-control" />
+            <input asp-for="Price" placeholder="00.00"  value="@Model.Price" class="form-control" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="AxleWidth" class="control-label">Axle width in inches</label>
-            <input asp-for="AxleWidth" placeholder="0.0" class="form-control" />
+            <input asp-for="AxleWidth" placeholder="0.0" value="@Model.AxleWidth" class="form-control" />
             <span asp-validation-for="AxleWidth" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="HangerWidth" class="control-label">Hanger width in inches</label>
-            <input asp-for="HangerWidth" placeholder="0.0" class="form-control" />
+            <input asp-for="HangerWidth" placeholder="0.0"  value="@Model.HangerWidth" class="form-control" />
             <span asp-validation-for="HangerWidth" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Height" class="control-label">Height in inches</label>
-            <input asp-for="Height" placeholder="0.0" class="form-control" />
+            <input asp-for="Height" placeholder="0.0"  value="@Model.Height" class="form-control" />
             <span asp-validation-for="Height" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Weight" class="control-label">Weight in grams</label>
-            <input asp-for="Weight" placeholder="0.0" class="form-control" />
+            <input asp-for="Weight" placeholder="0.0"  value="@Model.Weight" class="form-control" />
             <span asp-validation-for="Weight" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="ImagePath" class="control-label">Image Path</label>
-            <input asp-for="ImagePath" placeholder="https://example.com/img/image.png" class="form-control" />
+            <input asp-for="ImagePath" placeholder="https://example.com/img/image.png"  value="@Model.ImagePath" class="form-control" />
             <span asp-validation-for="ImagePath" class="text-danger"></span>
         </div>
         <div class="row">
@@ -57,7 +57,7 @@
                 <a asp-action="IndexAdmin" class="button button-danger width-100">Cancel</a>
             </div>
             <div class="col-sm-6">
-                <input type="submit" value="Create" class="button button-primary width-100" />
+                <input type="submit" value="Save Changes" class="button button-primary width-100" />
             </div>
         </div>
     </form>

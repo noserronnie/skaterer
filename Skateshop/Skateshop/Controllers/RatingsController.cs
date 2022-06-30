@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
 using Skaterer.Models;
+using Skaterer.Services.Auth;
+using Skaterer.Services.Products.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,136 +12,52 @@ namespace Skaterer.Controllers
     public class RatingsController : Controller
     {
         private readonly SkatererContext _context;
+        private readonly IAuthService _authService;
 
-        public RatingsController(SkatererContext context)
+        public RatingsController(SkatererContext context, IAuthService authService)
         {
             _context = context;
+            _authService = authService;
         }
 
-        // GET: Ratings
-        public async Task<IActionResult> Index()
+        // GET: Ratings/RateDeck
+        public async Task<IActionResult> RateDeck(long id)
         {
-            return View(await _context.Rating.ToListAsync());
-        }
+            if (!_authService.IsAuthorized(HttpContext))
+            {
+                return RedirectToAction("Login", "Users");
+            }
 
-        // GET: Ratings/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null)
+            var product = await _context.DeckProduct.FindAsync(id);
+            if (product is null)
             {
                 return NotFound();
             }
 
-            var rating = await _context.Rating
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (rating == null)
-            {
-                return NotFound();
-            }
-
-            return View(rating);
+            return View(new Rating { ProductId = id });
         }
 
-        // GET: Ratings/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Ratings/Create
+        // POST: Ratings/RateDeck
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Stars,ProductId,ProductType,Text")] Rating rating)
+        public async Task<IActionResult> RateDeck(Rating rating, long id)
         {
-            if (ModelState.IsValid)
+            if (!_authService.IsAuthorized(HttpContext))
             {
-                _context.Add(rating);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(rating);
-        }
-
-        // GET: Ratings/Edit/5
-        public async Task<IActionResult> Edit(long? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                return RedirectToAction("Login", "Users");
             }
 
-            var rating = await _context.Rating.FindAsync(id);
-            if (rating == null)
-            {
-                return NotFound();
-            }
-            return View(rating);
-        }
+            rating.Id = 0;
+            rating.UserId = _authService.GetUserId(HttpContext);
+            rating.ProductId = id;
+            rating.ProductType = ProductType.DECK;
+            rating.Author = await _context.User.FindAsync(rating.UserId);
 
-        // POST: Ratings/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Stars,ProductId,ProductType,Text")] Rating rating)
-        {
-            if (id != rating.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(rating);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RatingExists(rating.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(rating);
-        }
-
-        // GET: Ratings/Delete/5
-        public async Task<IActionResult> Delete(long? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var rating = await _context.Rating
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (rating == null)
-            {
-                return NotFound();
-            }
-
-            return View(rating);
-        }
-
-        // POST: Ratings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
-        {
-            var rating = await _context.Rating.FindAsync(id);
-            _context.Rating.Remove(rating);
+            _context.Rating.Add(rating);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("DeckDetails", "Products", rating.ProductId);
         }
 
         private bool RatingExists(long id)

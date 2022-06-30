@@ -7,6 +7,14 @@
 }
 
 <div class="row">
+    @if (Model.Count() == 0)
+    {
+        <div class="center-site width-40">
+            <i class="site-icon-danger fas fa-exclamation" style="font-size:200px"></i>
+            <br><br>
+            <h2 style="text-align: center;">There aren't any products. More products coming soon...</h2>
+        </div>
+    }
     @foreach (var item in Model)
     {
         <div class="col-sm-3" style="margin-bottom: 20px;">
