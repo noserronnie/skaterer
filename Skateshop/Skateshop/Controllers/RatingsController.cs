@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
 using Skaterer.Models;
 using Skaterer.Services.Auth;

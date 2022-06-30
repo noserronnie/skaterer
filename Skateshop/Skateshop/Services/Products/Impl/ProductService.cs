@@ -2,7 +2,6 @@
 using Skaterer.Data;
 using Skaterer.Models;
 using Skaterer.Services.Products.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -126,7 +125,7 @@ namespace Skaterer.Services.Products.Impl
 
             if (ratings.Count == 0)
             {
-                return 3.6;
+                return 0.0;
             }
 
             foreach (var stars in ratings.Select(r => r.Stars))
