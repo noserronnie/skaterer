@@ -57,7 +57,7 @@ namespace Skaterer.Controllers
 
             _context.Rating.Add(rating);
             await _context.SaveChangesAsync();
-            return RedirectToAction("DeckDetails", "Products", rating.ProductId);
+            return RedirectToAction("DeckDetails", "Products", new { id = rating.ProductId });
         }
 
         private bool RatingExists(long id)
