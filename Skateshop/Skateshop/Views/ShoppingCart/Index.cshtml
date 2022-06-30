@@ -25,7 +25,7 @@
                         var deckProduct = (DeckProduct)item;
                         <div class="row">
                             <div class="col-md-8">
-                                <a class="button button-primary width-100" style="" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
+                                <a class="button button-primary width-100" style="" asp-controller="Products" asp-action="DeckDetails" asp-route-id="@deckProduct.Id">View</a>
                             </div>
                             <div class="col-md-4">
                                 <a class="button button-danger width-100" style="" asp-action="RemoveDeckProduct" asp-route-id="@deckProduct.Id"><i class="fas fa-trash"></i></a>
@@ -35,22 +35,37 @@
                     else if (item is TrucksProduct)
                     {
                         var trucksProduct = (TrucksProduct)item;
-                        <div class="col-sm-6">
-                            <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a class="button button-primary width-100" style="" asp-controller="Products" asp-action="TrucksDetails" asp-route-id="@trucksProduct.Id">View</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="button button-danger width-100" style="" asp-action="RemoveTrucksProduct" asp-route-id="@trucksProduct.Id"><i class="fas fa-trash"></i></a>
+                            </div>
                         </div>
                     }
                     else if (item is WheelsProduct)
                     {
                         var wheelsProduct = (WheelsProduct)item;
-                        <div class="col-sm-6">
-                            <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a class="button button-primary width-100" style="" asp-controller="Products" asp-action="WheelsDetails" asp-route-id="@wheelsProduct.Id">View</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="button button-danger width-100" style="" asp-action="RemoveWheelsProduct" asp-route-id="@wheelsProduct.Id"><i class="fas fa-trash"></i></a>
+                            </div>
                         </div>
                     }
                     else if (item is GriptapeProduct)
                     {
                         var griptapeProduct = (GriptapeProduct)item;
-                        <div class="col-sm-6">
-                            <a class="button button-primary" style="width: 100%; bottom: 0" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a class="button button-primary width-100" style="" asp-controller="Products" asp-action="GriptapeDetails" asp-route-id="@griptapeProduct.Id">View</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="button button-danger width-100" style="" asp-action="RemoveGriptapeProduct" asp-route-id="@griptapeProduct.Id"><i class="fas fa-trash"></i></a>
+                            </div>
                         </div>
                     }
 
