@@ -59,7 +59,7 @@ namespace Skaterer.Services.Products.Impl
                 }
             }
 
-            return bestProducts;
+            return bestProducts.OrderByDescending(p => GetProductRating(p)).ToList();
         }
 
         public List<Rating> GetRatingsOfProduct(Product product)
