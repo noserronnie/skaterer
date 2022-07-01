@@ -9,6 +9,21 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var rating = productService.GetProductRating(Model);
+    var stars = 0;
+    var ratings = productService.GetRatingsOfProduct(Model);
+    var lastStarClass = string.Empty;
+    if (rating % 1 >= 0.75)
+    {
+        lastStarClass = "fa fa-star star-checked";
+    }
+    else if (rating % 1 < 0.25)
+    {
+        lastStarClass = "fa fa-star star-unchecked";
+    }
+    else
+    {
+        lastStarClass = "fas fa-star-half-alt star-checked";
+    }
 }
 
 <div>
@@ -20,17 +35,35 @@
         <div class="col-sm-7">
             <h1>@Model.Name</h1>
             <h4>CHF @Model.Price.ToString("0.00")</h4>
-            <div class="rating">
-                @for (var i = 0; i < rating; i++)
-                {
-                    <span class="fa fa-star star-checked"></span>
-                }
-                @for (var i = 0; i < 4 - rating; i++)
-                {
-                    <span class="fa fa-star star-unchecked"></span>
-                }
-                <span>(@rating.ToString("0.0") Stars)</span>
-            </div>
+            @if (productService.HasRatings(Model))
+            {
+                <div class="rating">
+                    @for (var i = 0; i < (int)rating; i++)
+                    {
+                        stars++;
+                        <span class="fa fa-star star-checked"></span>
+                    }
+                    @if ((int)rating != 5)
+                    {
+                        <span class="@lastStarClass"></span>
+                    }
+                    @for (var i = 0; i < 4 - stars; i++)
+                    {
+                        <span class="fa fa-star star-unchecked"></span>
+                    }
+                    <span>(@rating.ToString("0.00") Stars)</span>
+                </div>
+            }
+            else
+            {
+                <div class="rating">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <span class="fa fa-star star-disabled"></span>
+                    }
+                    <span>(No Ratings)</span>
+                </div>
+            }
             <hr />
 
             @if (authService.IsAuthorized(Context))
@@ -41,7 +74,7 @@
             {
                 <a class="button button-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
             }
-            <a class="button button-secondary" asp-area="" asp-controller="" asp-action="" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
+            <a class="button button-secondary" asp-area="" asp-controller="Ratings" asp-action="RateGriptape" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
             <hr />
 
             <div class="row">
@@ -70,4 +103,55 @@
         </div>
     </div>
 
+    <div>
+        <h3>Ratings</h3>
+        @if (ratings.Count() == 0)
+        {
+            <p>No Ratings yet. Be the first one who <a asp-area="" asp-controller="Ratings" asp-action="RateDeck" asp-route-id="@Model.Id" style="width: 100%">rates</a> the product!</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Stars</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                @foreach (var r in ratings)
+                {
+                    stars = 0;
+                    <tbody>
+                        <tr>
+                            <td class="col-sm-3">
+                                @r.Author.Username
+                            </td>
+                            <td class="col-sm-3">
+                                <div class="rating">
+                                    @for (var i = 0; i < (int)r.Stars; i++)
+                                    {
+                                        stars++;
+                                        <span class="fa fa-star star-checked"></span>
+                                    }
+                                    @if ((int)r.Stars != 5)
+                                    {
+                                        <span class="@lastStarClass"></span>
+                                    }
+                                    @for (var i = 0; i < 4 - stars; i++)
+                                    {
+                                        <span class="fa fa-star star-unchecked"></span>
+                                    }
+                                    <span>(@r.Stars.ToString("0.00") Stars)</span>
+                                </div>
+                            </td>
+                            <td class="col-sm-6">
+                                @r.Text
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        }
+    </div>
 </div>

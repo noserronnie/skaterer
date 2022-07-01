@@ -44,6 +44,7 @@
             var type = ProductType.DECK;
             var deleteAction = "DeleteDeck";
             var editAction = "EditDeck";
+            var detailsAction = "DeckDetails";
             long id = 0;
             @if (item is DeckProduct)
             {
@@ -54,6 +55,7 @@
                 type = ProductType.TRUCKS;
                 deleteAction = "DeleteTrucks";
                 editAction = "EditTrucks";
+                detailsAction = "DetailsAction";
                 id = ((TrucksProduct)item).Id;
             }
             else if (item is WheelsProduct)
@@ -61,6 +63,7 @@
                 type = ProductType.WHEELS;
                 deleteAction = "DeleteWheels";
                 editAction = "EditWheels";
+                detailsAction = "DetailsAction";
                 id = ((WheelsProduct)item).Id;
             }
             else if (item is GriptapeProduct)
@@ -68,6 +71,7 @@
                 type = ProductType.GRIPTAPE;
                 deleteAction = "DeleteGriptape";
                 editAction = "EditGriptape";
+                detailsAction = "DetailsAction";
                 id = ((GriptapeProduct)item).Id;
             }
             <tr class="invisiblebutton-container">
@@ -82,7 +86,7 @@
                 </td>
                 <td class="text-right">
                     <a class="button button-secondary" asp-action="@editAction" asp-route-id="@id">Edit</a>
-                    <a class="button button-secondary" asp-action="Details" asp-route-id="@id">Details</a>
+                    <a class="button button-secondary" asp-action="@detailsAction" asp-route-id="@id">Details</a>
                     <a class="button button-danger" asp-action="@deleteAction" asp-route-id="@id">Delete</a>
                 </td>
             </tr>
