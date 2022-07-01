@@ -129,13 +129,26 @@
                         <th>User</th>
                         <th>Stars</th>
                         <th>Rating</th>
+                        <th></th>
                     </tr>
                 </thead>
                 @foreach (var r in ratings)
                 {
                     stars = 0;
+                    if (r.Stars % 1 >= 0.75)
+                    {
+                        lastStarClass = "fa fa-star star-checked";
+                    }
+                    else if (r.Stars % 1 < 0.25)
+                    {
+                        lastStarClass = "fa fa-star star-unchecked";
+                    }
+                    else
+                    {
+                        lastStarClass = "fas fa-star-half-alt star-checked";
+                    }
                     <tbody>
-                        <tr>
+                        <tr class="invisiblebutton-container">
                             <td class="col-sm-3">
                                 @r.Author.Username
                             </td>
@@ -160,6 +173,16 @@
                             <td class="col-sm-6">
                                 @r.Text
                             </td>
+                            @if (authService.IsAdmin(Context) || (authService.IsAuthorized(Context) && authService.GetUsername(Context).Equals(r.Author.Username)))
+                            {
+                                <td class="col-sm-6">
+                                    <a class="button button-danger width-100" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
                         </tr>
                     </tbody>
                 }
