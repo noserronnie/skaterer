@@ -9,6 +9,8 @@ using Skaterer.Services.Auth;
 using Skaterer.Services.Auth.Impl;
 using Skaterer.Services.Products;
 using Skaterer.Services.Products.Impl;
+using Skaterer.Services.Ratings;
+using Skaterer.Services.Ratings.Impl;
 using System.Globalization;
 using System.Threading;
 
@@ -33,6 +35,7 @@ namespace Skaterer
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IRatingService, RatingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

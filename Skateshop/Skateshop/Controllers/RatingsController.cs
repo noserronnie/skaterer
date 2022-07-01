@@ -4,6 +4,7 @@ using Skaterer.Data;
 using Skaterer.Models;
 using Skaterer.Services.Auth;
 using Skaterer.Services.Products.Models;
+using Skaterer.Services.Ratings;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,11 +14,13 @@ namespace Skaterer.Controllers
     {
         private readonly SkatererContext _context;
         private readonly IAuthService _authService;
+        private readonly IRatingService _ratingService;
 
-        public RatingsController(SkatererContext context, IAuthService authService)
+        public RatingsController(SkatererContext context, IAuthService authService, IRatingService ratingService)
         {
             _context = context;
             _authService = authService;
+            _ratingService = ratingService;
         }
 
         // GET: Ratings/RateDeck
@@ -26,6 +29,10 @@ namespace Skaterer.Controllers
             if (!_authService.IsAuthorized(HttpContext))
             {
                 return RedirectToAction("Login", "Users");
+            }
+
+            if (_ratingService.UserAlreadyRatedProduct(_authService.GetUserId(HttpContext), id, ProductType.DECK)) {
+                return BadRequest("You already rated the product.");
             }
 
             var product = await _context.DeckProduct.FindAsync(id);
@@ -68,6 +75,11 @@ namespace Skaterer.Controllers
                 return RedirectToAction("Login", "Users");
             }
 
+            if (_ratingService.UserAlreadyRatedProduct(_authService.GetUserId(HttpContext), id, ProductType.TRUCKS))
+            {
+                return BadRequest("You already rated the product.");
+            }
+
             var product = await _context.TrucksProduct.FindAsync(id);
             if (product is null)
             {
@@ -108,6 +120,11 @@ namespace Skaterer.Controllers
                 return RedirectToAction("Login", "Users");
             }
 
+            if (_ratingService.UserAlreadyRatedProduct(_authService.GetUserId(HttpContext), id, ProductType.WHEELS))
+            {
+                return BadRequest("You already rated the product.");
+            }
+
             var product = await _context.WheelsProduct.FindAsync(id);
             if (product is null)
             {
@@ -146,6 +163,11 @@ namespace Skaterer.Controllers
             if (!_authService.IsAuthorized(HttpContext))
             {
                 return RedirectToAction("Login", "Users");
+            }
+
+            if (_ratingService.UserAlreadyRatedProduct(_authService.GetUserId(HttpContext), id, ProductType.GRIPTAPE))
+            {
+                return BadRequest("You already rated the product.");
             }
 
             var product = await _context.GriptapeProduct.FindAsync(id);

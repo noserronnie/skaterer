@@ -1,9 +1,12 @@
 ﻿@model Skaterer.Models.GriptapeProduct
 
+@using Skaterer.Services.Products.Models
 @using Skaterer.Services.Auth
 @using Skaterer.Services.Products
+@using Skaterer.Services.Ratings
 @inject IAuthService authService
 @inject IProductService productService
+@inject IRatingService ratingService
 
 @{
     ViewData["Title"] = "Details";
@@ -74,7 +77,10 @@
             {
                 <a class="button button-primary" asp-area="" asp-controller="Users" asp-action="Login" style="width: 100%">Add to Shopping Cart</a>
             }
-            <a class="button button-secondary" asp-area="" asp-controller="Ratings" asp-action="RateGriptape" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
+            @if (!ratingService.UserAlreadyRatedProduct(authService.GetUserId(Context), Model.Id, ProductType.GRIPTAPE))
+            {
+                <a class="button button-secondary" asp-area="" asp-controller="Ratings" asp-action="RateGriptape" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
+            }
             <hr />
 
             <div class="row">
