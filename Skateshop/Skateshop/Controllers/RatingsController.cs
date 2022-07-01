@@ -33,7 +33,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View(new Rating { ProductId = id });
+            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.DECK });
         }
 
         // POST: Ratings/RateDeck
@@ -73,7 +73,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View(new Rating { ProductId = id });
+            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.TRUCKS });
         }
 
         // POST: Ratings/RateTrucks
@@ -113,7 +113,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View(new Rating { ProductId = id });
+            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.WHEELS });
         }
 
         // POST: Ratings/RateWheels
@@ -153,7 +153,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View(new Rating { ProductId = id });
+            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.GRIPTAPE });
         }
 
         // POST: Ratings/RateGriptape

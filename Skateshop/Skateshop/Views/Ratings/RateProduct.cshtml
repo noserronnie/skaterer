@@ -1,16 +1,30 @@
 ﻿@model Skaterer.Models.Rating
+@using Skaterer.Services.Products.Models
 
 @{
-    ViewData["Title"] = "RateDeck";
+    ViewData["Title"] = "RateProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var productId = Model.ProductId;
+    var rateAction = "RateDeck";
+    if (Model.ProductType == ProductType.GRIPTAPE)
+    {
+        rateAction = "RateGriptape";
+    }
+    else if (Model.ProductType == ProductType.TRUCKS)
+    {
+        rateAction = "RateTrucks";
+    }
+    else if (Model.ProductType == ProductType.WHEELS)
+    {
+        rateAction = "RateWheels";
+    }
 }
 
 <h1>Rate Product</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="RateDeck" asp-route-id="@productId">
+        <form asp-action="@rateAction" asp-route-id="@productId">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Stars" class="control-label"></label>
