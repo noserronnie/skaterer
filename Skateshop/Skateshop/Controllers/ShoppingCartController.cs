@@ -179,8 +179,8 @@ namespace Skaterer.Controllers
                 .FirstAsync(u => u.Id == _authService.GetUserId(HttpContext));
             var shoppingCart = user.ShoppingCart;
 
-            var griptapeProduct = await _context.WheelsProduct.FindAsync(id);
-            shoppingCart.WheelsProducts.Add(griptapeProduct);
+            var griptapeProduct = await _context.GriptapeProduct.FindAsync(id);
+            shoppingCart.GriptapeProducts.Add(griptapeProduct);
 
             _context.ShoppingCart.Update(shoppingCart);
             _context.SaveChanges();
