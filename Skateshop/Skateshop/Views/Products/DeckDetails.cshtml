@@ -133,46 +133,53 @@
         else
         {
             <table class="table">
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Stars</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-            @foreach (var r in ratings)
-            {
-                stars = 0;
-                <tbody>
+                <thead>
                     <tr>
-                        <td class="col-sm-3">
-                            @r.Author.Username
-                        </td>
-                        <td class="col-sm-3">
-                            <div class="rating">
-                                @for (var i = 0; i < (int)r.Stars; i++)
-                                {
-                                    stars++;
-                                    <span class="fa fa-star star-checked"></span>
-                                }
-                                @if ((int)r.Stars != 5)
-                                {
-                                    <span class="@lastStarClass"></span>
-                                }
-                                @for (var i = 0; i < 4 - stars; i++)
-                                {
-                                    <span class="fa fa-star star-unchecked"></span>
-                                }
-                                <span>(@r.Stars.ToString("0.00") Stars)</span>
-                            </div>
-                        </td>
-                        <td class="col-sm-6">
-                            @r.Text
-                        </td>
+                        <th>User</th>
+                        <th>Stars</th>
+                        <th>Rating</th>
+                        <th></th>
                     </tr>
-                </tbody>
-            }
-        </table>
+                </thead>
+                @foreach (var r in ratings)
+                {
+                    stars = 0;
+                    <tbody>
+                        <tr>
+                            <td class="col-sm-3">
+                                @r.Author.Username
+                            </td>
+                            <td class="col-sm-3">
+                                <div class="rating">
+                                    @for (var i = 0; i < (int)r.Stars; i++)
+                                    {
+                                        stars++;
+                                        <span class="fa fa-star star-checked"></span>
+                                    }
+                                    @if ((int)r.Stars != 5)
+                                    {
+                                        <span class="@lastStarClass"></span>
+                                    }
+                                    @for (var i = 0; i < 4 - stars; i++)
+                                    {
+                                        <span class="fa fa-star star-unchecked"></span>
+                                    }
+                                    <span>(@r.Stars.ToString("0.00") Stars)</span>
+                                </div>
+                            </td>
+                            <td class="col-sm-6">
+                                @r.Text
+                            </td>
+                            @if (authService.IsAuthorized(Context) && authService.GetUsername(Context).Equals(r.Author.Username))
+                            {
+                                <td class="col-sm-6">
+                                    <a class="button button-danger width-100" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                }
+            </table>
         }
     </div>
 

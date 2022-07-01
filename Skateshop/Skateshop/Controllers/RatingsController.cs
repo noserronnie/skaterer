@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Skaterer.Data;
 using Skaterer.Models;
 using Skaterer.Services.Auth;
@@ -177,6 +178,44 @@ namespace Skaterer.Controllers
             _context.Rating.Add(rating);
             await _context.SaveChangesAsync();
             return RedirectToAction("GriptapeDetails", "Products", new { id = rating.ProductId });
+        }
+
+        public async Task<IActionResult> RemoveRating(long id)
+        {
+            var rating = await _context.Rating.Include(r => r.Author).FirstOrDefaultAsync(r => r.Id == id);
+
+            if (rating == null)
+            {
+                return NotFound();
+            }
+
+            if (!_authService.IsAuthorized(HttpContext) || !_authService.GetUsername(HttpContext).Equals(rating.Author.Username))
+            {
+                return Unauthorized();
+            }
+
+            _context.Rating.Remove(rating);
+            await _context.SaveChangesAsync();
+
+            var actionName = string.Empty;
+            if (rating.ProductType == ProductType.DECK)
+            {
+                actionName = "DeckDetails";
+            }
+            else if (rating.ProductType == ProductType.WHEELS)
+            {
+                actionName = "WheelsDetails";
+            }
+            else if (rating.ProductType == ProductType.TRUCKS)
+            {
+                actionName = "TrucksDetails";
+            }
+            else if (rating.ProductType == ProductType.GRIPTAPE)
+            {
+                actionName = "GriptapeDetails";
+            }
+
+            return RedirectToAction(actionName, "Products", new { id = rating.ProductId });
         }
 
         private bool RatingExists(long id)
