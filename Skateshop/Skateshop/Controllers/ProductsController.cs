@@ -23,7 +23,7 @@ namespace Skaterer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetProducts();
+            var products = await _productService.GetProductsAsync();
             return View(products);
         }
 
@@ -95,7 +95,7 @@ namespace Skaterer.Controllers
                 return Unauthorized();
             }
 
-            var products = await _productService.GetProducts();
+            var products = await _productService.GetProductsAsync();
             return View("Admin/Index", products);
         }
 

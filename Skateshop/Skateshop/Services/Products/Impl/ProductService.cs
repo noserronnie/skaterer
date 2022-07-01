@@ -18,7 +18,7 @@ namespace Skaterer.Services.Products.Impl
             _context = context;
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Product>> GetProductsAsync()
         {
             var products = new List<Product>();
 
@@ -34,9 +34,9 @@ namespace Skaterer.Services.Products.Impl
             return products;
         }
 
-        public async Task<List<Product>> GetProductsByRating(int amount)
+        public async Task<List<Product>> GetProductsByRatingAsync(int amount)
         {
-            var products = await GetProducts();
+            var products = await GetProductsAsync();
             var bestProducts = new List<Product>();
 
             for (var i = 0; i < products.Count; i++)

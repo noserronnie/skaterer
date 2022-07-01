@@ -7,8 +7,8 @@ namespace Skaterer.Services.Products
 {
     public interface IProductService
     {
-        Task<List<Product>> GetProducts();
-        Task<List<Product>> GetProductsByRating(int amount);
+        Task<List<Product>> GetProductsAsync();
+        Task<List<Product>> GetProductsByRatingAsync(int amount);
         List<Rating> GetRatingsOfProduct(Product product);
         double GetProductRating(Product product);
         bool HasRatings(Product proudct);
