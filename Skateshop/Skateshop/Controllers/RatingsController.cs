@@ -211,7 +211,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            if (!_authService.IsAuthorized(HttpContext) || !_authService.GetUsername(HttpContext).Equals(rating.Author.Username))
+            if (!_authService.IsAdmin(HttpContext) && !_authService.IsAuthorized(HttpContext) && !_authService.GetUsername(HttpContext).Equals(rating.Author.Username))
             {
                 return Unauthorized();
             }
