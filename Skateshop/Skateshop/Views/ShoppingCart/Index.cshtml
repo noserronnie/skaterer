@@ -74,6 +74,24 @@
         </div>
     }
 </div>
-<div>
-    <h2>Sum: @sum.ToString("0.00") CHF</h2>
+<div class="row">
+    <div class="col-lg-4">
+        <a  asp-controller="Products" asp-action="Index">
+            <input class="button button-danger width-100 text-dark" type="button" style="background-color: white; border-color: black;" value="< Continue shopping" />
+        </a>
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <a  asp-controller="Pay" asp-action="Index">
+            <input class="button button-primary width-100 text-light" type="button" value="Pay >"/>
+        </a>
+    </div>
 </div>
+<div class="row">
+    <div class="col-lg-4"> </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+    <h2>Sum: @sum.ToString("0.00") CHF</h2>
+    </div>
+</div>
+
