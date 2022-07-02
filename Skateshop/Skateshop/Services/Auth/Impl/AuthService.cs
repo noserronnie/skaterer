@@ -90,6 +90,55 @@ namespace Skaterer.Services.Auth.Impl
             return true;
         }
 
+        public bool LoginEncryptedPassword(HttpContext httpContext, User user)
+        {
+            var loginViewModel = new LoginViewModel
+            {
+                Password = user.Password
+            };
+
+            if (user.Username != null)
+            {
+                loginViewModel.Identifier = user.Username;
+            }
+            else if (user.Email != null)
+            {
+                loginViewModel.Identifier = user.Email;
+            }
+            else
+            {
+                return false;
+            }
+
+            try
+            {
+                var dbUser = _context.User.First
+                    (u => (u.Username.Equals(loginViewModel.Identifier)
+                    || u.Email.Equals(loginViewModel.Identifier))
+                    && u.Password.Equals(loginViewModel.Password));
+
+                var cookieOptions = new CookieOptions
+                {
+                    Path = "/"
+                };
+                httpContext.Response.Cookies.Append(
+                    "identifier",
+                    loginViewModel.Identifier,
+                    cookieOptions
+                );
+                httpContext.Response.Cookies.Append(
+                    "password",
+                    dbUser.Password,
+                    cookieOptions
+                );
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void Logout(HttpContext httpContext)
         {
             if (httpContext.Request.Cookies.Keys.Any(key => key.Equals("identifier")))

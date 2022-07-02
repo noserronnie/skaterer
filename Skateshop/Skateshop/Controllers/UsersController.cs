@@ -131,7 +131,7 @@ namespace Skaterer.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null || !_authService.IsAdmin(HttpContext))
+            if (id == null || (!_authService.IsAdmin(HttpContext) && _authService.GetUserId(HttpContext) != id))
             {
                 return NotFound();
             }
@@ -149,34 +149,42 @@ namespace Skaterer.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Username,Password")] User user)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Username")] User user)
         {
-            if (id != user.Id || !_authService.IsAdmin(HttpContext))
+            if (id != user.Id || (!_authService.IsAdmin(HttpContext) && _authService.GetUserId(HttpContext) != id))
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (_context.User.Any(u => u.Username.Equals(user.Username)))
             {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = "The username " + user.Username + " already exists.";
+                return View(user);
             }
-            return View(user);
+
+            var updatedUser = await _context.User.FindAsync(user.Id);
+            updatedUser.Username = user.Username;
+
+            try
+            {
+                _context.Update(updatedUser);
+                await _context.SaveChangesAsync();
+
+                _authService.Logout(HttpContext);
+                _authService.LoginEncryptedPassword(HttpContext, updatedUser);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(user.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View("Details", updatedUser);
         }
 
         // GET: Users/Delete/5

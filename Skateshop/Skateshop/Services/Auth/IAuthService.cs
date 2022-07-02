@@ -10,6 +10,7 @@ namespace Skaterer.Services.Auth
         bool IsAdmin(HttpContext httpContext);
         bool Login(HttpContext httpContext, User user);
         bool Login(HttpContext httpContext, LoginViewModel user);
+        bool LoginEncryptedPassword(HttpContext httpContext, User user);
         void Logout(HttpContext httpContext);
         string GetUsername(HttpContext httpContext);
         long GetUserId(HttpContext httpContext);

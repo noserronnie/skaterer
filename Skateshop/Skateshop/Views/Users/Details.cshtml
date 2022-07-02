@@ -1,31 +1,95 @@
 ﻿@model Skaterer.Models.User
 
+@using Skaterer.Services.Ratings
+@inject IRatingService ratingService
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ratings = await ratingService.GetRatingsOfUserAsync(Model.Id);
 }
 
-<h1>Details</h1>
+<h1>Profile</h1>
 
 <div>
-    <h4>User</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Username)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-7">
             @Html.DisplayFor(model => model.Username)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
+        <dd class="col-sm-3">
+            <a class="button button-primary" asp-action="Edit" asp-route-id="@Model.Id">Change Username</a>
         </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <h3>Your Ratings</h3>
+    @if (ratings.Count() == 0)
+    {
+        <p>You didn't rate any products yet.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Stars</th>
+                    <th>Rating</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var r in ratings)
+            {
+                var stars = 0;
+                var lastStarClass = string.Empty;
+                if (r.Stars % 1 >= 0.75)
+                {
+                    lastStarClass = "fa fa-star star-checked";
+                }
+                else if (r.Stars % 1 < 0.25)
+                {
+                    lastStarClass = "fa fa-star star-unchecked";
+                }
+                else
+                {
+                    lastStarClass = "fas fa-star-half-alt star-checked";
+                }
+                <tbody>
+                    <tr class="invisiblebutton-container">
+                        <td class="col-sm-3">
+                            <div class="rating">
+                                @for (var i = 0; i < (int)r.Stars; i++)
+                                {
+                                    stars++;
+                                    <span class="fa fa-star star-checked"></span>
+                                }
+                                @if ((int)r.Stars != 5)
+                                {
+                                    <span class="@lastStarClass"></span>
+                                }
+                                @for (var i = 0; i < 4 - stars; i++)
+                                {
+                                    <span class="fa fa-star star-unchecked"></span>
+                                }
+                                <span>(@r.Stars.ToString("0.00") Stars)</span>
+                            </div>
+                        </td>
+                        <td class="col-sm-6">
+                            @r.Text
+                        </td>
+                        <td class="col-sm-6">
+                            <a class="button button-danger width-100" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    }
+</div>
+
+<div>
     <a asp-action="Index">Back to List</a>
 </div>
