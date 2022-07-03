@@ -23,7 +23,7 @@ namespace Skaterer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetProductsAsync();
+            var products = await _productService.GetProductsByRatingAsync((await _productService.GetProductsAsync()).Count);
             return View(products);
         }
 
