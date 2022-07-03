@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Skaterer.Models;
 
 namespace Skaterer.Services.Products.Models
 {
@@ -8,8 +7,6 @@ namespace Skaterer.Services.Products.Models
 
         [Required]
         public string Name { get; set; }
-
-        public Brand Brand { get; set; }
 
         public string Description { get; set; }
 

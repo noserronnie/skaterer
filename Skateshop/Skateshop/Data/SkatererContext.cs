@@ -20,8 +20,6 @@ namespace Skaterer.Data
 
         public DbSet<GriptapeProduct> GriptapeProduct { get; set; }
 
-        public DbSet<Brand> Brand { get; set; }
-
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
 
         public DbSet<Skaterer.Models.Rating> Rating { get; set; }
