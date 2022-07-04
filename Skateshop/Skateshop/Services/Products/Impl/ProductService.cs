@@ -37,28 +37,9 @@ namespace Skaterer.Services.Products.Impl
         public async Task<List<Product>> GetProductsByRatingAsync(int amount)
         {
             var products = await GetProductsAsync();
-            var bestProducts = new List<Product>();
+            var bestProducts = products.OrderByDescending(p => GetProductRating(p)).Take(amount).ToList();
 
-            for (var i = 0; i < products.Count; i++)
-            {
-                if (bestProducts.Count < amount)
-                {
-                    bestProducts.Add(products[i]);
-                }
-                else
-                {
-                    for (var j = 0; j < bestProducts.Count; j++)
-                    {
-                        if (GetProductRating(products[i]) > GetProductRating(bestProducts[j]))
-                        {
-                            bestProducts[j] = products[i];
-                            j = bestProducts.Count;
-                        }
-                    }
-                }
-            }
-
-            return bestProducts.OrderByDescending(p => GetProductRating(p)).ToList();
+            return bestProducts;
         }
 
         public List<Rating> GetRatingsOfProduct(Product product)
