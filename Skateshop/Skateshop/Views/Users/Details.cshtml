@@ -1,5 +1,6 @@
 ﻿@model Skaterer.Models.User
 
+@using Skaterer.Services.Products.Models 
 @using Skaterer.Services.Ratings
 @inject IRatingService ratingService
 
@@ -38,6 +39,7 @@
                 <tr>
                     <th>Stars</th>
                     <th>Rating</th>
+                    <th>Product</th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,6 +58,20 @@
                 else
                 {
                     lastStarClass = "fas fa-star-half-alt star-checked";
+                }
+
+                var detailsAction = "DeckDetails";
+                if (r.ProductType == ProductType.GRIPTAPE)
+                {
+                    detailsAction = "GriptapeDetails";
+                }
+                else if (r.ProductType == ProductType.TRUCKS)
+                {
+                    detailsAction = "TrucksDetails";
+                }
+                else if (r.ProductType == ProductType.WHEELS)
+                {
+                    detailsAction = "WheelsDetails";
                 }
                 <tbody>
                     <tr class="invisiblebutton-container">
@@ -79,6 +95,9 @@
                         </td>
                         <td class="col-sm-6">
                             @r.Text
+                        </td>
+                        <td>
+                            <a class="button button-primary width-100" asp-controller="Products" asp-action="@detailsAction" asp-route-id="@r.ProductId">View</a>
                         </td>
                         <td class="col-sm-6">
                             <a class="button button-danger width-100" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>

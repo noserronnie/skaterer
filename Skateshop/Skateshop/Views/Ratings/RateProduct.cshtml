@@ -6,72 +6,76 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var productId = Model.ProductId;
     var rateAction = "RateDeck";
+    var detailsAction = "DeckDetails";
     if (Model.ProductType == ProductType.GRIPTAPE)
     {
         rateAction = "RateGriptape";
+        detailsAction = "GriptapeDetails";
     }
     else if (Model.ProductType == ProductType.TRUCKS)
     {
         rateAction = "RateTrucks";
+        detailsAction = "TrucksDetails";
     }
     else if (Model.ProductType == ProductType.WHEELS)
     {
         rateAction = "RateWheels";
+        detailsAction = "WheelsDetails";
     }
 }
 
-<h1>Rate Product</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="@rateAction" asp-route-id="@productId">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group rating">
-                <label>
-                    <input asp-for="Stars" type="radio" name="stars" value="1" />
-                    <span class="icon">★</span>
-                </label>
-                <label>
-                    <input asp-for="Stars" type="radio" name="stars" value="2" />
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                </label>
-                <label>
-                    <input asp-for="Stars" type="radio" name="stars" value="3" />
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                </label>
-                <label>
-                    <input asp-for="Stars" type="radio" name="stars" value="4" />
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                </label>
-                <label>
-                    <input asp-for="Stars" type="radio" name="stars" value="5" />
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                    <span class="icon">★</span>
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Rate" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="width-60" style="margin: 0 auto">
+    <h1>Rate Product</h1>
 
-<div>
-    <a asp-controller="Products" asp-action="Index">Back to List</a>
+    <hr />
+
+    <form asp-action="@rateAction" asp-route-id="@productId">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group rating">
+            <label>
+                <input asp-for="Stars" type="radio" name="stars" value="1" />
+                <span class="icon">★</span>
+            </label>
+            <label>
+                <input asp-for="Stars" type="radio" name="stars" value="2" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+            <label>
+                <input asp-for="Stars" type="radio" name="stars" value="3" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+            <label>
+                <input asp-for="Stars" type="radio" name="stars" value="4" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+            <label>
+                <input asp-for="Stars" type="radio" name="stars" value="5" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+        </div>
+        <div class="form-group">
+            <textarea asp-for="Text" placeholder="Message" class="form-control"></textarea>
+            <span asp-validation-for="Text" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a asp-action="@detailsAction" asp-controller="Products" asp-route-id="@Model.ProductId" class="button button-danger width-100">Cancel</a>
+            </div>
+            <div class="col-sm-6">
+                <input type="submit" value="Rate" class="button button-primary width-100" />
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
