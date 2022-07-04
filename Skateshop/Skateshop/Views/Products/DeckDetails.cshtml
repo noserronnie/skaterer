@@ -21,11 +21,11 @@
     }
     else if (rating % 1 < 0.25)
     {
-        lastStarClass = "fa fa-star star-unchecked";
+        lastStarClass = "fa fa-star-o star-unchecked";
     }
     else
     {
-        lastStarClass = "fas fa-star-half-alt star-checked";
+        lastStarClass = "fas fa-star-half-alt star-half";
     }
 }
 
@@ -52,7 +52,7 @@
                     }
                     @for (var i = 0; i < 4 - stars; i++)
                     {
-                        <span class="fa fa-star star-unchecked"></span>
+                        <span class="fa fa-star-o star-unchecked"></span>
                     }
                     <span>(@rating.ToString("0.00") Stars)</span>
                 </div>

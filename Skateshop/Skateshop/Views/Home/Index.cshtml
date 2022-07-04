@@ -36,7 +36,7 @@
         @foreach (var item in Model)
         {
             <div class="col-md-6 col-lg-3" style="margin-bottom: 20px;">
-                <div class="card bg-dark text-light" style="width: 100%; height: 100%">
+                <div class="card bg-dark text-light smooth-shadow" style="width: 100%; height: 100%">
                     <img class="card-img-top" src="@item.ImagePath" alt="Product Image">
                     <div class="card-body">
                         <h5 class="card-title" style="min-height: 50px">@item.Name</h5>
@@ -51,11 +51,11 @@
                             }
                             else if (rating % 1 < 0.25)
                             {
-                                lastStarClass = "fa fa-star star-unchecked";
+                                lastStarClass = "fa fa-star-o star-unchecked";
                             }
                             else
                             {
-                                lastStarClass = "fas fa-star-half-alt star-checked";
+                                lastStarClass = "fas fa-star-half-alt star-half";
                             }
                             <div class="rating">
                                 @for (var i = 0; i < (int)rating; i++)
@@ -69,7 +69,7 @@
                                 }
                                 @for (var i = 0; i < 4 - stars; i++)
                                 {
-                                    <span class="fa fa-star star-unchecked"></span>
+                                    <span class="fa fa-star-o star-unchecked"></span>
                                 }
                             </div>
                         }
