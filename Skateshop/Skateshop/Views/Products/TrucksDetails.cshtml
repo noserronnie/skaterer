@@ -81,6 +81,10 @@
             {
                 <a class="button button-secondary" asp-area="" asp-controller="Ratings" asp-action="RateTrucks" asp-route-id="@Model.Id" style="width: 100%">Rate Product</a>
             }
+            else
+            {
+                <button class="button button-disabled" style="width: 100%" disabled>Rate Product</button>
+            }
             <hr />
 
             <div class="row">
@@ -185,7 +189,7 @@
                             @if (authService.IsAdmin(Context) || (authService.IsAuthorized(Context) && authService.GetUsername(Context).Equals(r.Author.Username)))
                             {
                                 <td class="col-sm-6">
-                                    <a class="button button-danger width-100 button-round" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
+                                    <a class="button button-danger button-round" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
                                 </td>
                             }
                             else
