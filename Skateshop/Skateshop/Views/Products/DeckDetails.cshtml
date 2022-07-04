@@ -40,7 +40,7 @@
             <h4>CHF @Model.Price.ToString("0.00")</h4>
             @if (productService.HasRatings(Model))
             {
-                <div class="rating">
+                <div>
                     @for (var i = 0; i < (int)rating; i++)
                     {
                         stars++;
@@ -59,7 +59,7 @@
             }
             else
             {
-                <div class="rating">
+                <div>
                     @for (var i = 0; i < 5; i++)
                     {
                         <span class="fa fa-star star-disabled"></span>
@@ -156,11 +156,11 @@
                     }
                     else if (r.Stars % 1 < 0.25)
                     {
-                        lastStarClass = "fa fa-star star-unchecked";
+                        lastStarClass = "fa fa-star-o star-unchecked";
                     }
                     else
                     {
-                        lastStarClass = "fas fa-star-half-alt star-checked";
+                        lastStarClass = "fas fa-star-half-alt star-half";
                     }
                     <tbody>
                         <tr class="invisiblebutton-container">
@@ -168,7 +168,7 @@
                                 @r.Author.Username
                             </td>
                             <td class="col-sm-3">
-                                <div class="rating">
+                                <div>
                                     @for (var i = 0; i < (int)r.Stars; i++)
                                     {
                                         stars++;
@@ -180,7 +180,7 @@
                                     }
                                     @for (var i = 0; i < 4 - stars; i++)
                                     {
-                                        <span class="fa fa-star star-unchecked"></span>
+                                        <span class="fa fa-star-o star-unchecked"></span>
                                     }
                                     <span>(@r.Stars.ToString("0.00") Stars)</span>
                                 </div>

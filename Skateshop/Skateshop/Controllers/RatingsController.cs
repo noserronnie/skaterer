@@ -5,6 +5,7 @@ using Skaterer.Models;
 using Skaterer.Services.Auth;
 using Skaterer.Services.Products.Models;
 using Skaterer.Services.Ratings;
+using Skaterer.Services.Ratings.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.DECK });
+            return View("RateProduct", new RatingViewModel { ProductId = id, ProductType = ProductType.DECK });
         }
 
         // POST: Ratings/RateDeck
@@ -49,18 +50,22 @@ namespace Skaterer.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RateDeck(Rating rating, long id)
+        public async Task<IActionResult> RateDeck(RatingViewModel ratingViewModel, long id)
         {
             if (!_authService.IsAuthorized(HttpContext))
             {
                 return RedirectToAction("Login", "Users");
             }
 
-            rating.Id = 0;
-            rating.UserId = _authService.GetUserId(HttpContext);
-            rating.ProductId = id;
-            rating.ProductType = ProductType.DECK;
-            rating.Author = await _context.User.FindAsync(rating.UserId);
+            var rating = new Rating
+            {
+                UserId = _authService.GetUserId(HttpContext),
+                ProductId = id,
+                ProductType = ProductType.DECK,
+                Author = await _context.User.FindAsync(_authService.GetUserId(HttpContext)),
+                Text = ratingViewModel.Text,
+                Stars = ratingViewModel.Stars
+            };
 
             _context.Rating.Add(rating);
             await _context.SaveChangesAsync();
@@ -86,7 +91,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.TRUCKS });
+            return View("RateProduct", new RatingViewModel { ProductId = id, ProductType = ProductType.TRUCKS });
         }
 
         // POST: Ratings/RateTrucks
@@ -94,18 +99,22 @@ namespace Skaterer.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RateTrucks(Rating rating, long id)
+        public async Task<IActionResult> RateTrucks(Rating ratingViewModel, long id)
         {
             if (!_authService.IsAuthorized(HttpContext))
             {
                 return RedirectToAction("Login", "Users");
             }
 
-            rating.Id = 0;
-            rating.UserId = _authService.GetUserId(HttpContext);
-            rating.ProductId = id;
-            rating.ProductType = ProductType.TRUCKS;
-            rating.Author = await _context.User.FindAsync(rating.UserId);
+            var rating = new Rating
+            {
+                UserId = _authService.GetUserId(HttpContext),
+                ProductId = id,
+                ProductType = ProductType.TRUCKS,
+                Author = await _context.User.FindAsync(_authService.GetUserId(HttpContext)),
+                Text = ratingViewModel.Text,
+                Stars = ratingViewModel.Stars
+            };
 
             _context.Rating.Add(rating);
             await _context.SaveChangesAsync();
@@ -131,7 +140,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.WHEELS });
+            return View("RateProduct", new RatingViewModel { ProductId = id, ProductType = ProductType.WHEELS });
         }
 
         // POST: Ratings/RateWheels
@@ -139,18 +148,22 @@ namespace Skaterer.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RateWheels(Rating rating, long id)
+        public async Task<IActionResult> RateWheels(Rating ratingViewModel, long id)
         {
             if (!_authService.IsAuthorized(HttpContext))
             {
                 return RedirectToAction("Login", "Users");
             }
 
-            rating.Id = 0;
-            rating.UserId = _authService.GetUserId(HttpContext);
-            rating.ProductId = id;
-            rating.ProductType = ProductType.WHEELS;
-            rating.Author = await _context.User.FindAsync(rating.UserId);
+            var rating = new Rating
+            {
+                UserId = _authService.GetUserId(HttpContext),
+                ProductId = id,
+                ProductType = ProductType.WHEELS,
+                Author = await _context.User.FindAsync(_authService.GetUserId(HttpContext)),
+                Text = ratingViewModel.Text,
+                Stars = ratingViewModel.Stars
+            };
 
             _context.Rating.Add(rating);
             await _context.SaveChangesAsync();
@@ -176,7 +189,7 @@ namespace Skaterer.Controllers
                 return NotFound();
             }
 
-            return View("RateProduct", new Rating { ProductId = id, ProductType = ProductType.GRIPTAPE });
+            return View("RateProduct", new RatingViewModel { ProductId = id, ProductType = ProductType.GRIPTAPE });
         }
 
         // POST: Ratings/RateGriptape
@@ -184,18 +197,22 @@ namespace Skaterer.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RateGriptape(Rating rating, long id)
+        public async Task<IActionResult> RateGriptape(Rating ratingViewModel, long id)
         {
             if (!_authService.IsAuthorized(HttpContext))
             {
                 return RedirectToAction("Login", "Users");
             }
 
-            rating.Id = 0;
-            rating.UserId = _authService.GetUserId(HttpContext);
-            rating.ProductId = id;
-            rating.ProductType = ProductType.GRIPTAPE;
-            rating.Author = await _context.User.FindAsync(rating.UserId);
+            var rating = new Rating
+            {
+                UserId = _authService.GetUserId(HttpContext),
+                ProductId = id,
+                ProductType = ProductType.GRIPTAPE,
+                Author = await _context.User.FindAsync(_authService.GetUserId(HttpContext)),
+                Text = ratingViewModel.Text,
+                Stars = ratingViewModel.Stars
+            };
 
             _context.Rating.Add(rating);
             await _context.SaveChangesAsync();

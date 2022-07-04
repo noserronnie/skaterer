@@ -1,4 +1,4 @@
-﻿@model Skaterer.Models.Rating
+﻿@model Skaterer.Services.Ratings.Models.RatingViewModel
 @using Skaterer.Services.Products.Models
 
 @{
@@ -26,10 +26,37 @@
     <div class="col-md-4">
         <form asp-action="@rateAction" asp-route-id="@productId">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Stars" class="control-label"></label>
-                <input asp-for="Stars" class="form-control" />
-                <span asp-validation-for="Stars" class="text-danger"></span>
+            <div class="form-group rating">
+                <label>
+                    <input asp-for="Stars" type="radio" name="stars" value="1" />
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input asp-for="Stars" type="radio" name="stars" value="2" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input asp-for="Stars" type="radio" name="stars" value="3" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input asp-for="Stars" type="radio" name="stars" value="4" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input asp-for="Stars" type="radio" name="stars" value="5" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
