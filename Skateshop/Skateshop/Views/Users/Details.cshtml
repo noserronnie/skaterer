@@ -75,7 +75,7 @@
                 }
                 <tbody>
                     <tr class="invisiblebutton-container">
-                        <td class="col-sm-3">
+                        <td>
                             <div>
                                 @for (var i = 0; i < (int)r.Stars; i++)
                                 {
@@ -93,14 +93,14 @@
                                 <span>(@r.Stars.ToString("0.00") Stars)</span>
                             </div>
                         </td>
-                        <td class="col-sm-6">
+                        <td>
                             @r.Text
                         </td>
                         <td>
                             <a class="button button-primary width-100" asp-controller="Products" asp-action="@detailsAction" asp-route-id="@r.ProductId">View</a>
                         </td>
-                        <td class="col-sm-6">
-                            <a class="button button-danger width-100" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
+                        <td style="text-align: right;">
+                            <a class="button button-danger width-100 button-round" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>

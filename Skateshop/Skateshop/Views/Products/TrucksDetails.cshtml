@@ -185,7 +185,7 @@
                             @if (authService.IsAdmin(Context) || (authService.IsAuthorized(Context) && authService.GetUsername(Context).Equals(r.Author.Username)))
                             {
                                 <td class="col-sm-6">
-                                    <a class="button button-danger width-100" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
+                                    <a class="button button-danger width-100 button-round" asp-controller="Ratings" asp-action="RemoveRating" asp-route-id="@r.Id"><i class="fas fa-trash"></i></a>
                                 </td>
                             }
                             else
