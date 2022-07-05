@@ -17,11 +17,12 @@ namespace Skaterer.Services
             byte[] securityKeyArray = objMD5CryptoService.ComputeHash(UTF8Encoding.UTF8.GetBytes(SECURITY_KEY));
             objMD5CryptoService.Clear();
 
-            var objTripleDESCryptoService = new TripleDESCryptoServiceProvider();
-            objTripleDESCryptoService.Key = securityKeyArray;
-            objTripleDESCryptoService.Mode = CipherMode.ECB;
-            objTripleDESCryptoService.Padding = PaddingMode.PKCS7;
-
+            var objTripleDESCryptoService = new TripleDESCryptoServiceProvider
+            {
+                Key = securityKeyArray,
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.PKCS7
+            };
 
             var objCrytpoTransform = objTripleDESCryptoService.CreateEncryptor();
             byte[] resultArray = objCrytpoTransform.TransformFinalBlock(toEncryptedArray, 0, toEncryptedArray.Length);
