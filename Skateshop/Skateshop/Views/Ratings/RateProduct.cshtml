@@ -1,81 +1,111 @@
 ﻿@model Skaterer.Services.Ratings.Models.RatingViewModel
 @using Skaterer.Services.Products.Models
+@using Skaterer.Services.Products
+@inject IProductService productService
 
 @{
     ViewData["Title"] = "RateProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var productId = Model.ProductId;
-    var rateAction = "RateDeck";
-    var detailsAction = "DeckDetails";
-    if (Model.ProductType == ProductType.GRIPTAPE)
+    var rateAction = string.Empty;
+    var detailsAction = string.Empty;
+    var product = new Product();
+
+    if (Model.ProductType == ProductType.DECK)
+    {
+        rateAction = "RateDeck";
+        detailsAction = "DeckDetails";
+        product = (DeckProduct)(await productService.GetProductsAsync())
+            .SingleOrDefault(p => p is DeckProduct
+            && ((DeckProduct)p).Id == Model.ProductId);
+    }
+    else if (Model.ProductType == ProductType.GRIPTAPE)
     {
         rateAction = "RateGriptape";
         detailsAction = "GriptapeDetails";
+        product = (GriptapeProduct)(await productService.GetProductsAsync())
+            .SingleOrDefault(p => p is GriptapeProduct
+            && ((GriptapeProduct)p).Id == Model.ProductId);
     }
     else if (Model.ProductType == ProductType.TRUCKS)
     {
         rateAction = "RateTrucks";
         detailsAction = "TrucksDetails";
+        product = (TrucksProduct)(await productService.GetProductsAsync())
+            .SingleOrDefault(p => p is TrucksProduct
+            && ((TrucksProduct)p).Id == Model.ProductId);
     }
     else if (Model.ProductType == ProductType.WHEELS)
     {
         rateAction = "RateWheels";
         detailsAction = "WheelsDetails";
+        product = (WheelsProduct)(await productService.GetProductsAsync())
+            .SingleOrDefault(p => p is WheelsProduct
+            && ((WheelsProduct)p).Id == Model.ProductId);
     }
 }
 
-<div class="width-60" style="margin: 0 auto">
+<div class="width-80" style="margin: 0 auto">
     <h1>Rate Product</h1>
 
     <hr />
 
-    <form asp-action="@rateAction" asp-route-id="@productId">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group rating">
-            <label>
-                <input asp-for="Stars" type="radio" name="stars" value="1" />
-                <span class="icon">★</span>
-            </label>
-            <label>
-                <input asp-for="Stars" type="radio" name="stars" value="2" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
-            <label>
-                <input asp-for="Stars" type="radio" name="stars" value="3" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
-            <label>
-                <input asp-for="Stars" type="radio" name="stars" value="4" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
-            <label>
-                <input asp-for="Stars" type="radio" name="stars" value="5" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@product.ImagePath" class="width-100" />
         </div>
-        <div class="form-group">
-            <textarea asp-for="Text" placeholder="Message" class="form-control"></textarea>
-            <span asp-validation-for="Text" class="text-danger"></span>
+        <div class="col-md-6">
+            <h3>@product.Name</h3>
+
+            <form asp-action="@rateAction" asp-route-id="@productId">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group rating">
+                    <label>
+                        <input asp-for="Stars" type="radio" name="stars" value="1" />
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input asp-for="Stars" type="radio" name="stars" value="2" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input asp-for="Stars" type="radio" name="stars" value="3" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input asp-for="Stars" type="radio" name="stars" value="4" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input asp-for="Stars" type="radio" name="stars" value="5" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <textarea asp-for="Text" placeholder="Message" class="form-control" style="resize: none; height: 200px;"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a asp-action="@detailsAction" asp-controller="Products" asp-route-id="@Model.ProductId" class="button button-danger width-100">Cancel</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" value="Rate" class="button button-primary width-100" />
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <a asp-action="@detailsAction" asp-controller="Products" asp-route-id="@Model.ProductId" class="button button-danger width-100">Cancel</a>
-            </div>
-            <div class="col-sm-6">
-                <input type="submit" value="Rate" class="button button-primary width-100" />
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
 
 @section Scripts {
